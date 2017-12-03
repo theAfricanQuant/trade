@@ -200,25 +200,10 @@ class TradeJSON(object):
     def get_trade_results(self, data):
         """json in, json out"""
         data = json.loads(data)
-
-        # creates an object for all subjects in the json
         self.create_subjects(data)
-
-        # Get all the occurrences described in the json
         self.create_occurrences(data)
-
-        # create a Portfolio with the initial state
         self.create_portfolio(data)
-
-        # Put the operations in containers
         self.create_containers()
-
-        # Fetch the positions on each container
-        # and accumulates the positions
         self.accumulate_positions()
-
-        # get the current log and current state of
-        # all accumulators
         json_output = json.dumps(self.get_states())
-
         return json_output
