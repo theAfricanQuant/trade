@@ -4,8 +4,8 @@ from __future__ import absolute_import
 
 import unittest
 import copy
-from trade import trade
-from trade.container_tasks import (
+from trade_app.trade import trade
+from trade_app.trade.container_tasks import (
     find_volume, fetch_daytrades, prorate_commissions, group_positions
 )
 

@@ -4,11 +4,11 @@ from __future__ import absolute_import
 
 import unittest
 import json
-from trade.occurrences import Asset, Operation
-from trade.container_tasks import (
+from trade_app.trade.occurrences import Asset, Operation
+from trade_app.trade.container_tasks import (
     find_volume, fetch_daytrades, group_positions
 )
-from trade.trade_json import TradeJSON
+from trade_app.trade.trade_json import TradeJSON
 
 from trade_app.options import fetch_exercises, Option, Exercise
 

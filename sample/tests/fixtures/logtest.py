@@ -3,7 +3,7 @@
 from __future__ import absolute_import
 
 import unittest
-from accumulator import Accumulator
+from trade_app.trade.accumulator import Accumulator
 
 from fixtures.assets import ASSET
 

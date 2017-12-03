@@ -2,7 +2,7 @@
 
 from __future__ import absolute_import
 
-from trade.occurrences import Operation
+from trade_app.trade.occurrences import Operation
 
 from trade_app.options import Exercise
 from fixtures.assets import OPTION1, ASSET

@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+0.4 (2017-12-03)
+----------------
+
+* Accumulator no longer as a external dependency
 
 0.3 (2016-06-01)
 ----------------

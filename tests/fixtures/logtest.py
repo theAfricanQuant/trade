@@ -2,7 +2,7 @@
 
 from __future__ import absolute_import
 import unittest
-from accumulator import Accumulator
+from trade.accumulator import Accumulator
 
 from tests.fixtures.assets import ASSET
 

@@ -41,8 +41,8 @@ THE SOFTWARE.
 
 from __future__ import absolute_import
 
-from trade.occurrences import Asset, Operation
-from trade.utils import merge_operations
+from . trade.occurrences import Asset, Operation
+from . trade.utils import merge_operations
 
 
 class Option(Asset):

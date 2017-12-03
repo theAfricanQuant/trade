@@ -4,7 +4,7 @@ from __future__ import absolute_import
 
 import copy
 import unittest
-import accumulator
+import trade_app.trade.accumulator as accumulator
 
 from fixtures.operation_sequences import (
     OPERATION_SEQUENCE20, OPERATION_SEQUENCE21
