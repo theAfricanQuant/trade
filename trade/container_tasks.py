@@ -47,8 +47,13 @@ def group_positions(container):
     if 'positions' not in container.context:
         container.context['positions'] = {}
     for operation in container.operations:
-        if operation.quantity != 0 and operation.update_container:
-            add_to_position_group(container, operation)
+        group_position(container, operation)
+
+
+def group_position(container, operation):
+    """Group one operation in the container positions."""
+    if operation.quantity != 0 and operation.update_container:
+        add_to_position_group(container, operation)
 
 
 def add_to_position_group(container, operation):
