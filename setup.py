@@ -20,7 +20,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name='trade',
-    version="0.4",
+    version="0.4.1",
     description='Financial Application Framework',
     long_description=long_description,
     url='https://github.com/rochars/trade',
@@ -36,6 +36,7 @@ setup(
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
     ],
     keywords='asset stock exchange securities market finance investment money currency cost',
     packages=['trade'],

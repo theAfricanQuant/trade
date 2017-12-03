@@ -170,26 +170,26 @@ class Operation(Occurrence):
         if not same_sign(accumulator.state['quantity'], new_quantity):
             accumulator.state['price'] = self.real_price
 
+    def update_position_same_sign(self, accumulator):
+        """Update position when operation and position have the same sign."""
+        accumulator.state['price'] = average_price(
+            accumulator.state['quantity'],
+            accumulator.state['price'],
+            self.quantity,
+            self.real_price
+        )
+
     def update_positions(self, accumulator):
         """Updates the state of the asset with the operation data."""
         new_quantity = accumulator.state['quantity'] + self.quantity
-        # If the original quantity and the operation
-        # have the same sign, udpate the cost
+        # same sign, udpate the cost
         if same_sign(accumulator.state['quantity'], self.quantity):
-            accumulator.state['price'] = average_price(
-                accumulator.state['quantity'],
-                accumulator.state['price'],
-                self.quantity,
-                self.real_price
-            )
-        # If they have different signs and the original quantity
-        # was not zero, update the results
+            self.update_position_same_sign(accumulator)
+        # different signs, update the results
         elif accumulator.state['quantity'] != 0:
-            self.update_position_different_sign(
-                accumulator, new_quantity)
+            self.update_position_different_sign(accumulator, new_quantity)
         else:
             accumulator.state['price'] = self.real_price
-
         accumulator.state['quantity'] = new_quantity
         if not accumulator.state['quantity']:
             accumulator.state['price'] = 0

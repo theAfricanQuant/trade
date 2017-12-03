@@ -4,23 +4,27 @@ trade: Financial Application Framework
 | Copyright (c) 2015-2017 Rafael da Silva Rocha
 | https://python-trade.appspot.com
 | https://github.com/rochars/trade
-| http://trade.readthedocs.org
 
 --------------
 
 |Build| |Windows Build| |Coverage Status| |Scrutinizer| |Python Versions| |Live Demo|
 
 
+Installation
+------------
+
+    $ pip install trade
+
+
 trade
 -----
 **trade** is a framework for the development of financial applications. It operates
-on the concept of *subjects* and *occurrences*. A *subject* represents anything that
-can be traded, while an *occurrence* represents anything that affects one or more
+on the concept of *subjects* and *occurrences*. A *subject* represent anything that
+can be traded, while an *occurrence* represent anything that affects one or more
 subjects, like a stock exchange operation or a stock split.
 
-It was developed to work with any kind of *subject* and *occurrence* related to
-the financial market, and also to work under specific rules of different markets
-across the world, by following these principles:
+It is developed to work with any kind of *subject* and *occurrence* related to
+the financial market by following these principles:
 
 - different subjects may have different attributes
 - a subject may relate to none or many other subjects
@@ -34,13 +38,10 @@ should be as simple as creating new types of subjects and occurrences.
 
 You can try it `live <https://python-trade.appspot.com>`_.
 
-There is an ongoing effort to
-`document this project <http://trade.readthedocs.org>`_. Check it out.
-
 
 In a nutshell
 -------------
-A **trade** app works like a service. The user informs the items he have in stock and a series
+A **trade** app works like a service. The user informs the items in stock and a series
 of subsequent occurrences (purchases, sales, whatsoever) with those or other items.
 **trade** then calculates the effects of those occurrences and gives back the
 new amounts and costs of the items in stock.
@@ -184,19 +185,7 @@ An example of the JSON interface:
 Compatibility
 -------------
 
-trade is compatible with Python 2.7, 3.3, 3.4 and 3.5.
-
-
-Version
--------
-
-The current version is 0.3 alpha.
-
-
-Installation
-------------
-
-    $ pip install trade
+trade is compatible with Python 2.7, 3.3, 3.4, 3.5 and 3.6.
 
 
 License
