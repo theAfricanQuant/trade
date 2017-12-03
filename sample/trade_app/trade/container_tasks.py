@@ -47,8 +47,13 @@ def group_positions(container):
     if 'positions' not in container.context:
         container.context['positions'] = {}
     for operation in container.operations:
-        if operation.quantity != 0 and operation.update_container:
-            add_to_position_group(container, operation)
+        group_position(container, operation)
+
+
+def group_position(container, operation):
+    """Group one operation in the container positions."""
+    if operation.quantity != 0 and operation.update_container:
+        add_to_position_group(container, operation)
 
 
 def add_to_position_group(container, operation):
@@ -74,12 +79,20 @@ def fetch_daytrades(container):
     The daytrades are placed on the container positions under the
     'daytrades' key, inexed by the Daytrade asset's symbol.
     """
-    for i, operation_a in enumerate(container.operations):
-        for operation_b in [
-                x for x in container.operations[i:] if\
-                    daytrade_condition(x, operation_a)
-            ]:
-            Daytrade(operation_a, operation_b).append_to_positions(container)
+    for index, operation in enumerate(container.operations):
+        find_daytrade_pair(index, operation, container)
+
+def find_daytrade_pair(operation_a_index, operation_a, container):
+    """Search for possible daytrade pairs for a operation.
+    
+    If a daytrade is found, a Daytrade object is created and appended
+    to the container positions.
+    """  
+    for operation_b in [
+            x for x in container.operations[operation_a_index:] if\
+                daytrade_condition(x, operation_a)
+        ]:
+        Daytrade(operation_a, operation_b).append_to_positions(container)
 
 
 def prorate_commissions(container):
@@ -110,8 +123,13 @@ def prorate_commissions_by_position(container, operation):
     The ratio is based on the container volume and the volume of
     the position operation.
     """
+    if can_prorate_commission(container, operation):
+        percent = operation.volume / container.context['volume'] * 100
+        for key, value in container.commissions.items():
+            operation.commissions[key] = value * percent / 100
+
+def can_prorate_commission(container, operation):
+    """Check if the commissions can be divided by the positions or not."""
     if 'volume' in container.context:
         if operation.volume != 0 and container.context['volume'] != 0:
-            percent = operation.volume / container.context['volume'] * 100
-            for key, value in container.commissions.items():
-                operation.commissions[key] = value * percent / 100
+            return True;

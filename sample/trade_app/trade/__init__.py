@@ -25,6 +25,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 """
 
-__version__ = '0.4'
+__version__ = '0.4.2'
 __author__ = 'Rafael da Silva Rocha'
 __licence__ = 'MIT'
