@@ -45,12 +45,7 @@ class OperationContainer(object):
         This method executes all the methods defined in self.tasks
         in the order that they are listed.
         """
-
-        #TODO must not be necessary
         raw_operations = copy.deepcopy(self.operations)
-
         for task in self.tasks:
             task(self)
-
-        #TODO must not be necessary
         self.operations = raw_operations

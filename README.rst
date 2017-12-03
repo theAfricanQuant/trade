@@ -8,7 +8,7 @@ trade: Financial Application Framework
 
 --------------
 
-|Build| |Windows Build| |Coverage Status| |Code Climate| |Python Versions| |Live Demo|
+|Build| |Windows Build| |Coverage Status| |Scrutinizer| |Python Versions| |Live Demo|
 
 
 trade
@@ -231,8 +231,8 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    :target: https://ci.appveyor.com/project/rochars/trade
 .. |Coverage Status| image:: https://coveralls.io/repos/rochars/trade/badge.svg?branch=master&service=github
    :target: https://coveralls.io/github/rochars/trade?branch=master
-.. |Code Climate| image:: https://codeclimate.com/github/rochars/trade/badges/gpa.png
-   :target: https://codeclimate.com/github/rochars/trade
+.. |Scrutinizer| image:: https://scrutinizer-ci.com/g/rochars/trade/badges/quality-score.png?b=master
+   :target: https://scrutinizer-ci.com/g/rochars/trade/
 .. |Python Versions| image:: https://img.shields.io/pypi/pyversions/trade.png
    :target: https://pypi.python.org/pypi/trade/
 .. |Live Demo| image:: https://img.shields.io/badge/try-live%20demo-blue.png

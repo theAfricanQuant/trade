@@ -5,7 +5,7 @@ https://github.com/rochars/trade
 http://trade.readthedocs.org/
 License: MIT
 
-Copyright (c) 2015 Rafael da Silva Rocha
+Copyright (c) 2015-2017 Rafael da Silva Rocha
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -44,8 +44,6 @@ class TradeJSON(object):
         self.container_tasks = container_tasks
         self.types = types
         self.portfolio = None
-
-        # TODO can't be hardcoded
         self.totals = {
             'total_operations': 0,
             'sale_operations': 0,

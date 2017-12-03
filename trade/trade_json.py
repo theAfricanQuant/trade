@@ -44,8 +44,6 @@ class TradeJSON(object):
         self.container_tasks = container_tasks
         self.types = types
         self.portfolio = None
-
-        # TODO can't be hardcoded
         self.totals = {
             'total_operations': 0,
             'sale_operations': 0,
