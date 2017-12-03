@@ -1,7 +1,7 @@
 trade: Financial Application Framework
 ======================================
 
-| Copyright (c) 2016 Rafael da Silva Rocha
+| Copyright (c) 2015-2017 Rafael da Silva Rocha
 | https://python-trade.appspot.com
 | https://github.com/rochars/trade
 | http://trade.readthedocs.org
@@ -202,7 +202,7 @@ Installation
 License
 -------
 
-Copyright (c) 2016 Rafael da Silva Rocha
+Copyright (c) 2015-2017 Rafael da Silva Rocha
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the

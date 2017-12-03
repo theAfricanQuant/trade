@@ -1,6 +1,6 @@
 """trade: Financial Application Framework.
 
-Copyright (c) 2016 Rafael da Silva Rocha
+Copyright (c) 2015-2017 Rafael da Silva Rocha
 https://github.com/rochars/trade
 http://trade.readthedocs.org/
 License: MIT
