@@ -76,7 +76,7 @@ class TradeJSON(object):
 
     def create_subject_underlying(self):
         """Create the underlying objects of one subject."""
-        for subject, obj in self.subjects.items():
+        for obj in self.subjects.values():
             if obj['object'].underlying_assets:
                 original_underlying = obj['object'].underlying_assets
                 underlying_assets = {}
@@ -176,19 +176,19 @@ class TradeJSON(object):
     def get_state(self, accumulator, logs):
         """Get the state of one subject."""
         logs['assets'][accumulator.subject.symbol] = {
-                'totals': {
-                    "sales": self.subjects\
-                        [accumulator.subject.symbol]['sales'],
-                    "purchases": self.subjects\
-                        [accumulator.subject.symbol]['purchases'],
-                    "operations": self.subjects\
-                        [accumulator.subject.symbol]['operations'],
-                    "daytrades": self.subjects\
-                        [accumulator.subject.symbol]['daytrades'],
-                    "results": accumulator.state['results']
-                },
-                'states': {}
-            }
+            'totals': {
+                "sales": self.subjects\
+                    [accumulator.subject.symbol]['sales'],
+                "purchases": self.subjects\
+                    [accumulator.subject.symbol]['purchases'],
+                "operations": self.subjects\
+                    [accumulator.subject.symbol]['operations'],
+                "daytrades": self.subjects\
+                    [accumulator.subject.symbol]['daytrades'],
+                "results": accumulator.state['results']
+            },
+            'states': {}
+        }
         logs['assets'][accumulator.subject.symbol]['states'] = \
             accumulator.log
         for key in accumulator.state['results'].keys():

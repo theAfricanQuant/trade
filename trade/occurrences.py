@@ -153,37 +153,35 @@ class Operation(Occurrence):
             self.quantity
         )
 
-    def fix_price_for_zero_quantity(self, accumulator):
-        if not accumulator.state['quantity']:
-            accumulator.state['price'] = 0
-
     def update_position_different_sign(self, accumulator, new_quantity):
+        """Update when the operation and position have opposing signs."""
+
         # check if we are trading more than what
-            # we have on our portfolio; if yes,
-            # the result will be calculated based
-            # only on what was traded (the rest create
-            # a new position)
-            if abs(self.quantity) > abs(accumulator.state['quantity']):
-                result_quantity = accumulator.state['quantity'] * -1
+        # we have on our portfolio; if yes,
+        # the result will be calculated based
+        # only on what was traded (the rest create
+        # a new position)
+        if abs(self.quantity) > abs(accumulator.state['quantity']):
+            result_quantity = accumulator.state['quantity'] * -1
 
-            # If we're not trading more than what we have,
-            # then use the operation quantity to calculate
-            # the result
-            else:
-                result_quantity = self.quantity
+        # If we're not trading more than what we have,
+        # then use the operation quantity to calculate
+        # the result
+        else:
+            result_quantity = self.quantity
 
-            # calculates the results and costs
-            results = \
-                result_quantity * accumulator.state['price'] - \
-                result_quantity * self.real_price
-            if results:
-                self.results['trades'] = results
-            if not same_sign(accumulator.state['quantity'], new_quantity):
-                accumulator.state['price'] = self.real_price
+        # calculates the results and costs
+        results = \
+            result_quantity * accumulator.state['price'] - \
+            result_quantity * self.real_price
+        if results:
+            self.results['trades'] = results
+        if not same_sign(accumulator.state['quantity'], new_quantity):
+            accumulator.state['price'] = self.real_price
 
     def update_positions(self, accumulator):
         """Updates the state of the asset with the operation data."""
-        
+
         new_quantity = accumulator.state['quantity'] + self.quantity
 
         # If the original quantity and the operation
@@ -210,7 +208,8 @@ class Operation(Occurrence):
             accumulator.state['price'] = self.real_price
 
         accumulator.state['quantity'] = new_quantity
-        self.fix_price_for_zero_quantity(accumulator)
+        if not accumulator.state['quantity']:
+            accumulator.state['price'] = 0
 
 
 class Daytrade(Operation):
