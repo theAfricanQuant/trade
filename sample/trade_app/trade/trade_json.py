@@ -55,6 +55,11 @@ class TradeJSON(object):
 
     def create_subjects(self, data):
         """creates a subject object for all subjects in the json."""
+        self.create_subject(data)
+        self.create_subject_underlying()
+
+    def create_subject(self, data):
+        """Create one subject from a subject in the JSON."""
         for subject, details in data['subjects'].items():
             self.subjects[subject] = {
                 'object': self.types[details['type']](
@@ -69,6 +74,8 @@ class TradeJSON(object):
                 'operations': 0
             }
 
+    def create_subject_underlying(self):
+        """Create the underlying objects of one subject."""
         for subject, obj in self.subjects.items():
             if obj['object'].underlying_assets:
                 original_underlying = obj['object'].underlying_assets
@@ -127,13 +134,17 @@ class TradeJSON(object):
         for key in sorted(self.containers.keys()):
             self.containers[key].fetch_positions()
             if 'positions' in self.containers[key].context:
-                for position_type, position_asset in \
-                    self.containers[key].context['positions'].items():
-                    for asset_symbol, position in position_asset.items():
-                        self.portfolio.accumulate(position)
-                        if position_type == 'daytrades':
-                            self.totals['total_daytrades'] += 1
-                            self.subjects[asset_symbol]['daytrades'] += 1
+                self.accumulate_position(key)
+
+    def accumulate_position(self, key):
+        """Accumulate one position in the portfolio."""
+        for position_type, position_asset in \
+            self.containers[key].context['positions'].items():
+            for asset_symbol, position in position_asset.items():
+                self.portfolio.accumulate(position)
+                if position_type == 'daytrades':
+                    self.totals['total_daytrades'] += 1
+                    self.subjects[asset_symbol]['daytrades'] += 1
 
     def get_base_log(self):
         """Get the structure of the return json."""
@@ -159,28 +170,32 @@ class TradeJSON(object):
         logs = self.get_base_log()
         for accumulator in self.portfolio.subjects.values():
             if accumulator.subject.symbol not in logs['assets']:
-                logs['assets'][accumulator.subject.symbol] = {
-                    'totals': {
-                        "sales": self.subjects\
-                            [accumulator.subject.symbol]['sales'],
-                        "purchases": self.subjects\
-                            [accumulator.subject.symbol]['purchases'],
-                        "operations": self.subjects\
-                            [accumulator.subject.symbol]['operations'],
-                        "daytrades": self.subjects\
-                            [accumulator.subject.symbol]['daytrades'],
-                        "results": accumulator.state['results']
-                    },
-                    'states': {}
-                }
-            logs['assets'][accumulator.subject.symbol]['states'] = \
-                accumulator.log
-            for key in accumulator.state['results'].keys():
-                if key not in logs['totals']['results']:
-                    logs['totals']['results'][key] = 0
-                logs['totals']['results'][key] += accumulator.state['results']\
-                    [key]
+                self.get_state(accumulator, logs)
         return logs
+
+    def get_state(self, accumulator, logs):
+        """Get the state of one subject."""
+        logs['assets'][accumulator.subject.symbol] = {
+                'totals': {
+                    "sales": self.subjects\
+                        [accumulator.subject.symbol]['sales'],
+                    "purchases": self.subjects\
+                        [accumulator.subject.symbol]['purchases'],
+                    "operations": self.subjects\
+                        [accumulator.subject.symbol]['operations'],
+                    "daytrades": self.subjects\
+                        [accumulator.subject.symbol]['daytrades'],
+                    "results": accumulator.state['results']
+                },
+                'states': {}
+            }
+        logs['assets'][accumulator.subject.symbol]['states'] = \
+            accumulator.log
+        for key in accumulator.state['results'].keys():
+            if key not in logs['totals']['results']:
+                logs['totals']['results'][key] = 0
+            logs['totals']['results'][key] += accumulator.state['results']\
+                [key]
 
     def get_trade_results(self, data):
         """json in, json out"""

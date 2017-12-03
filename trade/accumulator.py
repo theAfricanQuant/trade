@@ -120,17 +120,22 @@ class Accumulator(object):
         self.log = {}
         self.date = None
         if state:
-            self.state = copy.deepcopy(state)
-            if 'date' in state:
-                self.state.pop('date', None)
-                self.date = state['date']
-                self.log[state['date']] = {}
-                for key in [x for x in state.keys() if x != 'date']:
-                    self.log[state['date']][key] = state[key]
+            self.set_initial_state(state)
         else:
             self.state = subject.get_default_state()
         self.subject = subject
         self.logging = logging
+
+    def set_initial_state(self, state):
+        """Set the initial state of the Accumulator object."""
+        self.state = copy.deepcopy(state)
+        if 'date' in state:
+            self.state.pop('date', None)
+            self.date = state['date']
+            self.log[state['date']] = {}
+            for key in [x for x in state.keys() if x != 'date']:
+                self.log[state['date']][key] = state[key]
+
 
     def accumulate(self, occurrence):
         """Accumulates an occurrence."""

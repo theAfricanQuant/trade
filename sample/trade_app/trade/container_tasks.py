@@ -50,6 +50,7 @@ def group_positions(container):
         if operation.quantity != 0 and operation.update_container:
             add_to_position_group(container, operation)
 
+
 def add_to_position_group(container, operation):
     """Adds an operation to the common operations list."""
     if 'operations' not in container.context['positions']:
@@ -91,11 +92,17 @@ def prorate_commissions(container):
     if 'positions' in container.context:
         for position_value in container.context['positions'].values():
             for position in position_value.values():
-                if position.update_position:
-                    prorate_commissions_by_position(container, position)
-                else:
-                    for operation in position.operations:
-                        prorate_commissions_by_position(container, operation)
+                prorate(container, position)
+
+
+def prorate(container, position):
+    """Prorate the commissions for one position."""
+    if position.update_position:
+        prorate_commissions_by_position(container, position)
+    else:
+        for operation in position.operations:
+            prorate_commissions_by_position(container, operation)
+
 
 def prorate_commissions_by_position(container, operation):
     """Prorates the commissions of the container for one position.
