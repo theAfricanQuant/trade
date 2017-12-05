@@ -23,8 +23,7 @@ on the concept of *subjects* and *occurrences*. A *subject* represent anything t
 can be traded, while an *occurrence* represent anything that affects one or more
 subjects, like a stock exchange operation or a stock split.
 
-It is developed to work with any kind of *subject* and *occurrence* related to
-the financial market by following these principles:
+It is developed to work with any kind of *subject* and *occurrence* by following these principles:
 
 - different subjects may have different attributes
 - a subject may relate to none or many other subjects

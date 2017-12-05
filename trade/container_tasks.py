@@ -84,10 +84,10 @@ def fetch_daytrades(container):
 
 def find_daytrade_pair(operation_a_index, operation_a, container):
     """Search for possible daytrade pairs for a operation.
-    
+
     If a daytrade is found, a Daytrade object is created and appended
     to the container positions.
-    """  
+    """
     for operation_b in [
             x for x in container.operations[operation_a_index:] if\
                 daytrade_condition(x, operation_a)
@@ -132,4 +132,4 @@ def can_prorate_commission(container, operation):
     """Check if the commissions can be divided by the positions or not."""
     if 'volume' in container.context:
         if operation.volume != 0 and container.context['volume'] != 0:
-            return True;
+            return True
