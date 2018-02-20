@@ -5,7 +5,7 @@ http://trade.readthedocs.org/
 https://github.com/rochars/trade
 License: MIT
 
-Copyright (c) 2015 Rafael da Silva Rocha
+Copyright (c) 2015-2018 Rafael da Silva Rocha
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

@@ -29,8 +29,8 @@ THE SOFTWARE.
 from __future__ import absolute_import
 
 import json
-from . holder import Portfolio
 
+from . holder import Holder
 from . context import Context
 
 
@@ -127,7 +127,7 @@ class TradeJSON(object):
         initial_state = {}
         for asset_name, asset_state in data['initial state'].items():
             initial_state[self.subjects[asset_name]['object']] = asset_state
-        self.portfolio = Portfolio(state=initial_state)
+        self.holder = Holder(state=initial_state)
 
     def accumulate_positions(self):
         """Accumulate each container position on the portoflio."""
@@ -141,7 +141,7 @@ class TradeJSON(object):
         for position_type, position_asset in \
             self.containers[key].context['positions'].items():
             for asset_symbol, position in position_asset.items():
-                self.portfolio.accumulate(position)
+                self.holder.accumulate(position)
                 if position_type == 'daytrades':
                     self.totals['total_daytrades'] += 1
                     self.subjects[asset_symbol]['daytrades'] += 1
@@ -168,7 +168,7 @@ class TradeJSON(object):
     def get_states(self):
         """Fill the return json with the log of each accumulator."""
         logs = self.get_base_log()
-        for accumulator in self.portfolio.subjects.values():
+        for accumulator in self.holder.subjects.values():
             if accumulator.subject.symbol not in logs['assets']:
                 self.get_state(accumulator, logs)
         return logs

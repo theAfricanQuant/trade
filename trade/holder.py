@@ -1,6 +1,6 @@
 """Holder
 
-Copyright (c) 2015-2017 Rafael da Silva Rocha
+Copyright (c) 2015-2018 Rafael da Silva Rocha
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -23,16 +23,53 @@ THE SOFTWARE.
 
 import copy
 
+
+
+class Holder(object):
+    """A holder of subjects.
+
+    It receives Occurrence objects and update its accumulators
+    with them. The state of each subject in the Portfolio accumulators
+    are updated according to the occurrence.
+
+    Attributes:
+        subjects: A dict {Subject.symbol: Accumulator}.
+    """
+
+    def __init__(self, state=None):
+        self.subjects = {}
+        if state:
+            for subject, subject_state in state.items():
+                self.subjects[subject.symbol] = Accumulator(
+                    subject,
+                    subject_state
+                )
+
+    def accumulate(self, occurrence):
+        """Update the state of the Portfolio with an occurrence."""
+        occurrence.update_portfolio(self)
+        self.accumulate_occurrence(occurrence)
+
+    def accumulate_occurrence(self, occurrence):
+        """Accumulates an occurrence on its corresponding accumulator."""
+        if occurrence.subject.symbol not in self.subjects:
+            self.subjects[occurrence.subject.symbol] = Accumulator(
+                occurrence.subject
+            )
+        self.subjects[occurrence.subject.symbol].accumulate(occurrence)
+
+
+
 class Accumulator(object):
     """An accumulator of occurrences with an subject.
 
-    It can accumulate a series of occurrence objects and update its
-    state based on the occurrences it accumulates.
+    Accumulators represent the situation of a subject belonging to a
+    Holder.
 
-    The update of the accumulator object state is responsibility
-    of the occurrence it accumulates.
+    A Holder have multiple Accumulator instances on its subjects list,
+    one for each subject the holder have.
 
-    It accumualates occurrences of a single subject.
+    An Accumulator object accumualates occurrences of a single subject.
 
     Attributes:
         subject: An subject instance, the subject whose data is being
@@ -88,37 +125,3 @@ class Accumulator(object):
         }
         """
         self.log[operation.date] = copy.deepcopy(self.state)
-
-
-class Portfolio(object):
-    """A portfolio of subject accumulators.
-
-    It receives Occurrence objects and update its accumulators
-    with them. The state of each subject in the Portfolio accumulators
-    are updated according to the occurrence.
-
-    Attributes:
-        subjects: A dict {Subject.symbol: Accumulator}.
-    """
-
-    def __init__(self, state=None):
-        self.subjects = {}
-        if state:
-            for subject, subject_state in state.items():
-                self.subjects[subject.symbol] = Accumulator(
-                    subject,
-                    subject_state
-                )
-
-    def accumulate(self, occurrence):
-        """Update the state of the Portfolio with an occurrence."""
-        occurrence.update_portfolio(self)
-        self.accumulate_occurrence(occurrence)
-
-    def accumulate_occurrence(self, occurrence):
-        """Accumulates an occurrence on its corresponding accumulator."""
-        if occurrence.subject.symbol not in self.subjects:
-            self.subjects[occurrence.subject.symbol] = Accumulator(
-                occurrence.subject
-            )
-        self.subjects[occurrence.subject.symbol].accumulate(occurrence)

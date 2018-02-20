@@ -1,6 +1,6 @@
 """Subject
 
-Copyright (c) 2015-2017 Rafael da Silva Rocha
+Copyright (c) 2015-2018 Rafael da Silva Rocha
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -48,17 +48,12 @@ class Subject(object):
         self.symbol = symbol
         self.name = name
         self.expiration_date = expiration_date
-        #---
         self.underlying_assets = kwargs.get('underlying_assets', {})
 
     def get_default_state(self):
-        """Returns the default state of the subject class.
-
-        Every time an Accumulator object is created it calls this
-        method from the subject it is accumulating data from.
-        """
+        """Returns the default state of the subject."""
         return copy.deepcopy(self.default_state)
 
     def expire(self, accumulator):
-        """Updates the accumulator with the expiration of this subject."""
-        accumulator.state = copy.deepcopy(self.default_state)
+        """Expires the subject on the Holder portfolio."""
+        accumulator.state = self.get_default_state()
