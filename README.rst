@@ -57,7 +57,7 @@ A *context* may have its own rules
 
 A *context* may be a situation where daytrades should be identified.
 
-A *context* may also involve taxes and other costs.
+A *context* may also involve taxes and other costs altering the value of the trades.
 
 
 Extending the framework

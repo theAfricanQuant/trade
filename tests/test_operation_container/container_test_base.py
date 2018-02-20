@@ -4,8 +4,8 @@ from __future__ import absolute_import
 import unittest
 import copy
 
-from trade import trade
-from trade.container_tasks import (
+from trade.context import Context
+from trade.context import (
     prorate_commissions, fetch_daytrades, group_positions, find_volume
 )
 
@@ -27,7 +27,7 @@ class TestFetchPositions(unittest.TestCase):
             group_positions,
             prorate_commissions,
         ]
-        self.container = trade.Context(
+        self.container = Context(
             operations=copy.deepcopy(self.operations),
             tasks=tasks
             )

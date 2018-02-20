@@ -34,6 +34,8 @@ class Subject(object):
             date for the subject, if any.
         default_state: a dictionary with the default state of the
             subject.
+        underlying_assets: Underlying subject of this subject, if
+            any.
     """
 
     default_state = default_state = {

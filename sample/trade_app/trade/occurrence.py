@@ -34,32 +34,7 @@ from . utils import (
 )
 
 class Occurrence(object):
-    """An occurrence with an subject in a date.
-
-    Occurrences are events involving an subject.
-
-    Attributes:
-        subject: A Subject object.
-        date: A string 'YYYY-mm-dd'.
-    """
-
-    '''
-    def __init__(self, subject, date):
-        self.subject = subject
-        self.date = date
-    '''
-
-    def update_portfolio(self, portfolio):
-        """Should udpate the portfolio state.
-
-        This is method is called by the Portfolio object when it accumulates
-        the Occurrence. It is called before the accumulation occurs, so the
-        Occurrence is free to manipulate the Portfolio data before it is passed
-        to its subject corresponding Accumulator.
-        """
-        pass
-
-    """An Operation represents an occurrence with an Asset.
+    """An occurrence with a subject in a date.
 
     Class Attributes:
         update_position: A boolean indication if the operation should
@@ -81,7 +56,6 @@ class Occurrence(object):
             to be deducted added to the the operation value.
         operations: A list of underlying occurrences that the
             might may have.
-
     """
 
     # By default every operation
@@ -105,6 +79,16 @@ class Occurrence(object):
         self.commissions = kwargs.get('commissions', {})
         self.raw_results = kwargs.get('raw_results', {})
         self.operations = kwargs.get('operations', [])
+
+    def update_portfolio(self, portfolio):
+        """Should udpate the portfolio state.
+
+        This is method is called by the Portfolio object when it accumulates
+        the Occurrence. It is called before the accumulation occurs, so the
+        Occurrence is free to manipulate the Portfolio data before it is passed
+        to its subject corresponding Accumulator.
+        """
+        pass
 
     @property
     def results(self):
@@ -199,12 +183,3 @@ class Occurrence(object):
         accumulator.state['quantity'] = new_quantity
         if not accumulator.state['quantity']:
             accumulator.state['price'] = 0
-
-    '''
-    def update_accumulator(self, accumulator):
-        """Should udpate the accumulator state.
-
-        This method is called before the Accumulator log its current state.
-        """
-        pass
-    '''

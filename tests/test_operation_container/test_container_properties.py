@@ -4,8 +4,8 @@ from __future__ import absolute_import
 import unittest
 import copy
 
-from trade import trade
-from trade.container_tasks import find_volume
+from trade.context import Context
+from trade.context import find_volume
 from tests.fixtures.operations import OPERATION39
 from tests.fixtures.operation_sequences import (
     OPERATION_SEQUENCE6, OPERATION_SEQUENCE7
@@ -19,7 +19,7 @@ class TestContainerProperties(unittest.TestCase):
     volume = 0
 
     def setUp(self):
-        self.container = trade.Context(
+        self.container = Context(
             operations=copy.deepcopy(self.operations),
             tasks=[find_volume]
         )

@@ -1,11 +1,11 @@
-"""Tasks for the OperationContainer.
+"""trade
 
 trade: Financial Application Framework
 http://trade.readthedocs.org/
 https://github.com/rochars/trade
 License: MIT
 
-Copyright (c) 2016 Rafael da Silva Rocha
+Copyright (c) 2015 Rafael da Silva Rocha
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,13 +26,38 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 """
 
+from __future__ import absolute_import
 from __future__ import division
+
+import copy
 
 from . utils import (
     merge_operations,
     daytrade_condition
 )
-from daytrade import Daytrade
+from . daytrade import Daytrade
+
+
+class Context(object):
+    """A container for operations."""
+
+    def __init__(self, operations, tasks):
+        self.operations = operations
+        self.tasks = tasks
+        self.context = {}
+
+    def fetch_positions(self):
+        """Run the the methods defined in self.tasks.
+
+        This method executes all the methods defined in self.tasks
+        in the order that they are listed, applying the context rules
+        to all operations in the context.
+        """
+        raw_operations = copy.deepcopy(self.operations)
+        for task in self.tasks:
+            task(self)
+        self.operations = raw_operations
+
 
 def find_volume(container):
     """Find the volume of the operations in the container."""
@@ -81,6 +106,7 @@ def fetch_daytrades(container):
     for index, operation in enumerate(container.operations):
         find_daytrade_pair(index, operation, container)
 
+
 def find_daytrade_pair(operation_a_index, operation_a, container):
     """Search for possible daytrade pairs for a operation.
 
@@ -126,6 +152,7 @@ def prorate_commissions_by_position(container, operation):
         percent = operation.volume / container.context['volume'] * 100
         for key, value in container.commissions.items():
             operation.commissions[key] = value * percent / 100
+
 
 def can_prorate_commission(container, operation):
     """Check if the commissions can be divided by the positions or not."""

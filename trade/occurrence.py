@@ -183,12 +183,3 @@ class Occurrence(object):
         accumulator.state['quantity'] = new_quantity
         if not accumulator.state['quantity']:
             accumulator.state['price'] = 0
-
-    '''
-    def update_accumulator(self, accumulator):
-        """Should udpate the accumulator state.
-
-        This method is called before the Accumulator log its current state.
-        """
-        pass
-    '''

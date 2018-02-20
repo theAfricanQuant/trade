@@ -4,8 +4,8 @@ from __future__ import absolute_import
 import unittest
 import copy
 
-from trade import trade
-from trade.container_tasks import (
+from trade.context import Context
+from trade.context import (
     fetch_daytrades,
     add_to_position_group, find_volume,
 )
@@ -19,7 +19,7 @@ class TestContainerCreationCase00(unittest.TestCase):
     """Test the creation of a OperationContainer."""
 
     def setUp(self):
-        self.container = trade.Context(
+        self.container = Context(
             operations=[],
             tasks=[find_volume]
         )
@@ -32,7 +32,7 @@ class TestContainerCreationCase01(unittest.TestCase):
     """Test the creation of a OperationContainer."""
 
     def setUp(self):
-        self.container = trade.Context(
+        self.container = Context(
             operations=[],
             tasks=[find_volume]
         )

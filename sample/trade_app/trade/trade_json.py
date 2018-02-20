@@ -31,7 +31,7 @@ from __future__ import absolute_import
 import json
 from . holder import Portfolio
 
-from . trade import Context
+from . context import Context
 
 
 class TradeJSON(object):
