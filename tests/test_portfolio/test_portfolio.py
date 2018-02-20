@@ -3,7 +3,7 @@
 from __future__ import absolute_import
 import copy
 import unittest
-import trade.accumulator as accumulator
+import trade.holder as accumulator
 
 class TestPortfolio(unittest.TestCase):
     """Base class for Portfolio tests."""

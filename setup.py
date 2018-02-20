@@ -1,6 +1,6 @@
 """trade: Financial Application Framework.
 
-Copyright (c) 2015-2017 Rafael da Silva Rocha
+Copyright (c) 2015-2018 Rafael da Silva Rocha
 https://github.com/rochars/trade
 http://trade.readthedocs.org/
 License: MIT
@@ -20,7 +20,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name='trade',
-    version="0.4.2",
+    version="1.0.0",
     description='Financial Application Framework',
     long_description=long_description,
     url='https://github.com/rochars/trade',

@@ -2,46 +2,46 @@
 
 from __future__ import absolute_import
 
-from trade_app.trade.occurrences import Operation
+from trade_app.trade.occurrence import Occurrence
 
 from trade_app.options import Exercise
 from fixtures.assets import OPTION1, ASSET
 
 
-OPERATION46 = Operation(
+OPERATION46 = Occurrence(
     subject=ASSET,
     date='2015-10-01',
     quantity=10,
     price=5
 )
 
-OPERATION47 = Operation(
+OPERATION47 = Occurrence(
     subject=ASSET,
     date='2015-10-05',
     quantity=10,
     price=7.5
 )
 
-OPERATION54 = Operation(
+OPERATION54 = Occurrence(
     quantity=100,
     price=5,
     subject=ASSET,
     date='2015-01-01'
 )
 
-OPTION_OPERATION1 = Operation(
+OPTION_OPERATION1 = Occurrence(
     subject=OPTION1,
     date='2015-10-02',
     quantity=10,
     price=1
 )
-OPTION_OPERATION2 = Operation(
+OPTION_OPERATION2 = Occurrence(
     subject=OPTION1,
     date='2015-10-04',
     quantity=20,
     price=1
 )
-OPTION_OPERATION3 = Operation(
+OPTION_OPERATION3 = Occurrence(
     quantity=100,
     price=10,
     subject=OPTION1,

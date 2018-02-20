@@ -1,7 +1,7 @@
-trade: Financial Application Framework
-======================================
+trade
+=====
 
-| Copyright (c) 2015-2017 Rafael da Silva Rocha
+| Copyright (c) 2015-2018 Rafael da Silva Rocha
 | https://python-trade.appspot.com
 | https://github.com/rochars/trade
 
@@ -18,38 +18,62 @@ Installation
 
 trade
 -----
-**trade** is a framework for the development of financial applications. It operates
-on the concept of *subjects* and *occurrences*. A *subject* represent anything that
-can be traded, while an *occurrence* represent anything that affects one or more
-subjects, like a stock exchange operation or a stock split.
+**trade** is a framework for the creation of financial applications.
 
-It is developed to work with any kind of *subject* and *occurrence* by following these principles:
 
-- different subjects may have different attributes
-- a subject may relate to none or many other subjects
-- an occurrence must involve one or many subjects
-- there may be an existing context for any subject
-- different occurrences can implement different processes
-- an occurrence may update the state of none or many subjects
+It uses the concept of *holders*, *subjects* and *occurrences*
+--------------------------------------------------------------
+A *subject* represent anything that can be traded.
 
-Extending the framework with market-specific rules and exotic operations
-should be as simple as creating new types of subjects and occurrences.
+An *occurrence* represent anything that affects one or more subjects.
+
+A *holder* is someone who owns subjects and may perform *occurrences*.
+
+*Occurrences* may happen without intervention of the holder.
+
+*Occurrences* may occur alone or in *contexts*, like a group of operations performed within a day.
+
+
+Different subjects may have different attributes
+------------------------------------------------
+A *subject* may be the share of a corporation, wooden logs, livestock and so on.
+
+
+An occurrence involves one or many subjects
+-------------------------------------------
+A *occurrence* may be the purchase of shares of a corporation, updating the holder's
+situation.
+
+
+A subject may relate to none or many subjects
+---------------------------------------------
+The subject of an occurrence may be related to some underlyng subject (like it is with a *put option*,
+for example); Occurrences with this subject may have effects on its underlying subjects.
+
+
+A *context* may have its own rules
+----------------------------------
+*Contexts* are groups of operations.
+
+A *context* may be a situation where daytrades should be identified.
+
+A *context* may also involve taxes and other costs.
+
+
+Extending the framework
+-----------------------
+
+**trade** can be extended with new types of *occurrences* and *subjects*.
+New *context rules* can be created. Look at the examples.
+
 
 You can try it `live <https://python-trade.appspot.com>`_.
-
-
-In a nutshell
--------------
-A **trade** app works like a service. The user informs the items in stock and a series
-of subsequent occurrences (purchases, sales, whatsoever) with those or other items.
-**trade** then calculates the effects of those occurrences and gives back the
-new amounts and costs of the items in stock.
 
 
 Quickstart
 ----------
 
-An example of the JSON interface:
+An example of the JSON interfacem using the **fetch_daytrades** context rule:
 
 .. code:: python
 
@@ -190,7 +214,7 @@ trade is compatible with Python 2.7, 3.3, 3.4, 3.5 and 3.6.
 License
 -------
 
-Copyright (c) 2015-2017 Rafael da Silva Rocha
+Copyright (c) 2015-2018 Rafael da Silva Rocha
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the

@@ -4,7 +4,7 @@ from __future__ import absolute_import
 import unittest
 import copy
 
-from trade.occurrences import Daytrade
+from trade.daytrade import Daytrade
 from tests.fixtures.assets import ASSET
 from tests.fixtures.operations import (
     OPERATION24, OPERATION25, OPERATION60, OPERATION39

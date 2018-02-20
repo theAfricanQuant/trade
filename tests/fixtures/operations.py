@@ -3,7 +3,8 @@
 from __future__ import absolute_import
 import copy
 
-from trade.occurrences import Operation, Daytrade
+from trade.occurrence import Occurrence as Operation
+from trade.daytrade import Daytrade
 from .assets import ASSET, ASSET2, ASSET3
 
 

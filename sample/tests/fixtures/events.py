@@ -2,13 +2,13 @@
 
 from __future__ import absolute_import
 
-from trade_app.trade.occurrences import Operation
+from trade_app.trade.occurrence import Occurrence
 
 from trade_app.events import StockSplit, BonusShares
 from fixtures.assets import ASSET
 
 
-class TestEvent(Operation):
+class TestEvent(Occurrence):
     """A dummy event for the tests."""
 
     def update_accumulator(self, container):

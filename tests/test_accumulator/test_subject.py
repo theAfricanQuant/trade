@@ -24,9 +24,9 @@ THE SOFTWARE.
 from __future__ import absolute_import
 import unittest
 
-from trade.accumulator import Accumulator
+from trade.holder import Accumulator
 from tests.test_accumulator import fixtures
-from trade.accumulator import Subject
+from trade.subject import Subject
 
 
 class TestSubject(unittest.TestCase):

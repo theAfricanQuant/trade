@@ -41,11 +41,12 @@ THE SOFTWARE.
 
 from __future__ import absolute_import
 
-from . trade.occurrences import Asset, Operation
+from . trade.occurrence import Occurrence
+from . trade.subject import Subject
 from . trade.utils import merge_operations
 
 
-class Option(Asset):
+class Option(Subject):
     """Represents a vanilla option.
 
     Represents both calls and puts.
@@ -80,7 +81,7 @@ class Option(Asset):
 
         # Create an operation to consume
         # the option on the portfolio.
-        option_consuming = Operation(
+        option_consuming = Occurrence(
             quantity=abs(quantity)*-1,
             price=0,
             subject=self
@@ -99,7 +100,7 @@ class Option(Asset):
         # consuming operation.
         for underlying_asset, ratio in self.underlying_assets.items():
             operations.append(
-                Operation(
+                Occurrence(
                     quantity=quantity * ratio,
                     price=price + premium,
                     subject=underlying_asset
@@ -108,7 +109,7 @@ class Option(Asset):
         return operations
 
 
-class Exercise(Operation):
+class Exercise(Occurrence):
     """An option exercise operation.
 
     An exercise will likely change the state of both the derivative and

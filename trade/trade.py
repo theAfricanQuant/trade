@@ -31,7 +31,7 @@ from __future__ import absolute_import
 import copy
 
 
-class OperationContainer(object):
+class Context(object):
     """A container for operations."""
 
     def __init__(self, operations, tasks):
@@ -40,10 +40,11 @@ class OperationContainer(object):
         self.context = {}
 
     def fetch_positions(self):
-        """Run the tasks.
+        """Run the the methods defined in self.tasks.
 
         This method executes all the methods defined in self.tasks
-        in the order that they are listed.
+        in the order that they are listed, applying the context rules
+        to all operations in the context.
         """
         raw_operations = copy.deepcopy(self.operations)
         for task in self.tasks:

@@ -29,9 +29,9 @@ THE SOFTWARE.
 from __future__ import absolute_import
 
 import json
-from . accumulator import Portfolio
+from . holder import Portfolio
 
-from . trade import OperationContainer
+from . trade import Context
 
 
 class TradeJSON(object):
@@ -116,7 +116,7 @@ class TradeJSON(object):
         """
         for occurrence in self.occurrences:
             if occurrence.date not in self.containers:
-                self.containers[occurrence.date] = OperationContainer(
+                self.containers[occurrence.date] = Context(
                     operations=[],
                     tasks=self.container_tasks
                 )

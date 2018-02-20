@@ -27,7 +27,7 @@ class TestFetchPositions(unittest.TestCase):
 
     def setUp(self):
 
-        self.container = trade.OperationContainer(
+        self.container = trade.Context(
             tasks=[
                 find_volume,
                 fetch_daytrades,

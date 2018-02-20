@@ -1,9 +1,4 @@
-"""Accumulator
-
-A framework for the accumulation of occurrences with subjects.
-
-https://github.com/rochars/accumulator
-License: MIT
+"""Holder
 
 Copyright (c) 2015-2017 Rafael da Silva Rocha
 
@@ -27,71 +22,6 @@ THE SOFTWARE.
 """
 
 import copy
-
-
-class Subject(object):
-    """A subject of an occurrence.
-
-    Attributes:
-        symbol: A string representing the symbol of the subject.
-        name: A string representing the name of the subject.
-        expiration_date: A string 'YYYY-mm-dd' representing the
-            expiration date of the subject, if any.
-        default_state: a dictionary with the default state
-            of this subject.
-    """
-
-    default_state = {}
-
-    def __init__(self, symbol=None, name=None, expiration_date=None):
-        self.symbol = symbol
-        self.name = name
-        self.expiration_date = expiration_date
-
-    def get_default_state(self):
-        """Returns the default state of the subject class.
-
-        Every time an Accumulator object is created it calls this
-        method from the Asset object it is accumulating data from.
-        """
-        return copy.deepcopy(self.default_state)
-
-    def expire(self, accumulator):
-        """Updates the accumulator with the expiration of this subject."""
-        accumulator.state = copy.deepcopy(self.default_state)
-
-
-class Occurrence(object):
-    """An occurrence with an subject in a date.
-
-    Occurrences are events involving an subject.
-
-    Attributes:
-        subject: An Asset object.
-        date: A string 'YYYY-mm-dd'.
-    """
-
-    def __init__(self, subject, date):
-        self.subject = subject
-        self.date = date
-
-    def update_portfolio(self, portfolio):
-        """Should udpate the portfolio state.
-
-        This is method is called by the Portfolio object when it accumulates
-        the Occurrence. It is called before the accumulation occurs, so the
-        Occurrence is free to manipulate the Portfolio data before it is passed
-        to its subject corresponding Accumulator.
-        """
-        pass
-
-    def update_accumulator(self, accumulator):
-        """Should udpate the accumulator state.
-
-        This method is called before the Accumulator log its current state.
-        """
-        pass
-
 
 class Accumulator(object):
     """An accumulator of occurrences with an subject.
@@ -164,10 +94,11 @@ class Portfolio(object):
     """A portfolio of subject accumulators.
 
     It receives Occurrence objects and update its accumulators
-    with them.
+    with them. The state of each subject in the Portfolio accumulators
+    are updated according to the occurrence.
 
     Attributes:
-        subjects: A dict {Asset.symbol: Accumulator}.
+        subjects: A dict {Subject.symbol: Accumulator}.
     """
 
     def __init__(self, state=None):

@@ -27,7 +27,7 @@ class TestFetchPositions(unittest.TestCase):
             group_positions,
             prorate_commissions,
         ]
-        self.container = trade.OperationContainer(
+        self.container = trade.Context(
             operations=copy.deepcopy(self.operations),
             tasks=tasks
             )

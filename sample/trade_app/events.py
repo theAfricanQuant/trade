@@ -37,11 +37,11 @@ THE SOFTWARE.
 
 from __future__ import absolute_import
 
-from . trade.occurrences import Operation
+from . trade.occurrence import Occurrence
 from . trade.utils import average_price
 
 
-class BaseEvent(Operation):
+class BaseEvent(Occurrence):
     """Base class for events."""
 
     def __init__(self, asset, date, factor):

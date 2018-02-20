@@ -1,11 +1,6 @@
-"""Utility functions for the trade module.
+"""utils
 
-trade: Financial Application Framework
-http://trade.readthedocs.org/
-https://github.com/rochars/trade
-License: MIT
-
-Copyright (c) 2015 Rafael da Silva Rocha
+Copyright (c) 2015-2018 Rafael da Silva Rocha
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -64,3 +59,4 @@ def find_purchase_and_sale(operation_a, operation_b):
     if operation_b.quantity > operation_a.quantity:
         return operation_b, operation_a
     return operation_a, operation_b
+

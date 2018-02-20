@@ -2,9 +2,9 @@
 
 from __future__ import absolute_import
 import unittest
-from trade.accumulator import Accumulator
+from trade.holder import Accumulator
 
-from trade.occurrences import Operation
+from trade.occurrence import Occurrence as Operation
 
 from tests.fixtures.assets import ASSET
 

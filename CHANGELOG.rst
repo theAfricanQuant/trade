@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+1.0.0
+-----
+* Simplified subjects and occurrences
+* Contexts
+* Holders
+
 0.4 (2017-12-03)
 ----------------
 

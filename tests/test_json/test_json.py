@@ -5,7 +5,8 @@ import unittest
 import json
 
 from trade.trade_json import TradeJSON
-from trade.occurrences import Asset, Operation
+from trade.occurrence import Occurrence as Operation
+from trade.subject import Subject as Asset
 from trade.container_tasks import fetch_daytrades, group_positions, find_volume
 
 

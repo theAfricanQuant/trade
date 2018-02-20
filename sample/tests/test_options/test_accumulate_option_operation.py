@@ -4,7 +4,7 @@ from __future__ import absolute_import
 
 import unittest
 import copy
-from trade_app.trade.accumulator import Accumulator
+from trade_app.trade.holder import Accumulator
 
 from fixtures.assets import OPTION1
 from fixtures.operations import OPTION_OPERATION3

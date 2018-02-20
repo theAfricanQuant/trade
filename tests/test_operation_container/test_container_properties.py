@@ -19,7 +19,7 @@ class TestContainerProperties(unittest.TestCase):
     volume = 0
 
     def setUp(self):
-        self.container = trade.OperationContainer(
+        self.container = trade.Context(
             operations=copy.deepcopy(self.operations),
             tasks=[find_volume]
         )

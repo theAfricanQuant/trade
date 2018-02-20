@@ -39,7 +39,7 @@ class TestAccumulateOperationCase01(LogTest):
     expected_state = EXPECTED_STATE26
 
     def setUp(self):
-        container = trade.OperationContainer(
+        container = trade.Context(
             operations=[copy.deepcopy(OPERATION19)],
             tasks=[find_volume, group_positions, prorate_commissions]
         )
@@ -58,7 +58,7 @@ class TestAccumulateOperationCase02(LogTest):
     expected_state = EXPECTED_STATE16
 
     def setUp(self):
-        container = trade.OperationContainer(
+        container = trade.Context(
             operations=[copy.deepcopy(OPERATION20)],
             tasks=[find_volume, group_positions]
         )
@@ -76,7 +76,7 @@ class TestAccumulateOperationCase03(LogTest):
     expected_state = EXPECTED_STATE17
 
     def setUp(self):
-        container = trade.OperationContainer(
+        container = trade.Context(
             operations=[copy.deepcopy(OPERATION19)],
             tasks=[find_volume, group_positions]
         )

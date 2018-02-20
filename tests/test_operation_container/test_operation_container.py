@@ -19,7 +19,7 @@ class TestContainerCreationCase00(unittest.TestCase):
     """Test the creation of a OperationContainer."""
 
     def setUp(self):
-        self.container = trade.OperationContainer(
+        self.container = trade.Context(
             operations=[],
             tasks=[find_volume]
         )
@@ -32,7 +32,7 @@ class TestContainerCreationCase01(unittest.TestCase):
     """Test the creation of a OperationContainer."""
 
     def setUp(self):
-        self.container = trade.OperationContainer(
+        self.container = trade.Context(
             operations=[],
             tasks=[find_volume]
         )

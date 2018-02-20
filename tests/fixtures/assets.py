@@ -2,7 +2,8 @@
 
 from __future__ import absolute_import
 
-from trade.occurrences import Asset
+#from trade.occurrences import Asset
+from trade.subject import Subject as Asset
 
 
 ASSET = Asset(symbol='some asset')

@@ -1,10 +1,10 @@
 from __future__ import absolute_import
 import unittest
 
-from trade.accumulator import Accumulator
+from trade.holder import Accumulator
 from tests.test_accumulator import fixtures
-from trade.accumulator import Occurrence
-from trade.accumulator import Subject
+from trade.occurrence import Occurrence
+from trade.subject import Subject
 
 class TestOccurrence(unittest.TestCase):
     """Test the creation of Occurrence objects."""

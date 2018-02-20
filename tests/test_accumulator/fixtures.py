@@ -23,9 +23,9 @@ THE SOFTWARE.
 
 from __future__ import absolute_import
 
-from trade.accumulator import Accumulator as accumulator
-from trade.accumulator import Subject
-from trade.accumulator import Occurrence
+from trade.holder import Accumulator as accumulator
+from trade.subject import Subject
+from trade.occurrence import Occurrence
 
 
 class SubjectSubclass0(Subject):
