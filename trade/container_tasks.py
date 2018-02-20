@@ -32,7 +32,7 @@ from . utils import (
     merge_operations,
     daytrade_condition
 )
-from daytrade import Daytrade
+from . daytrade import Daytrade
 
 def find_volume(container):
     """Find the volume of the operations in the container."""
