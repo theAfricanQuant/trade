@@ -38,7 +38,7 @@ THE SOFTWARE.
 from __future__ import absolute_import
 
 from . trade.occurrence import Occurrence
-from . trade.utils import average_price
+from . trade.occurrence import average_price
 
 
 class BaseEvent(Occurrence):

@@ -43,7 +43,7 @@ from __future__ import absolute_import
 
 from . trade.occurrence import Occurrence
 from . trade.subject import Subject
-from . trade.utils import merge_operations
+from . trade.daytrade import merge_operations
 
 
 class Option(Subject):

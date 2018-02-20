@@ -43,7 +43,7 @@ class TradeJSON(object):
         self.containers = {}
         self.container_tasks = container_tasks
         self.types = types
-        self.portfolio = None
+        self.holder = None
         self.totals = {
             'total_operations': 0,
             'sale_operations': 0,

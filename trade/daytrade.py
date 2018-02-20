@@ -29,12 +29,7 @@ THE SOFTWARE.
 from __future__ import absolute_import
 from __future__ import division
 
-from . occurrence import Occurrence
-
-from . utils import (
-    merge_operations,
-    find_purchase_and_sale
-)
+from . occurrence import Occurrence, same_sign, average_price
 
 
 class Daytrade(Occurrence):
@@ -125,3 +120,29 @@ class Daytrade(Occurrence):
                 .operations[operation_index],
             self.operations[operation_index]
         )
+
+
+def merge_operations(existing_operation, operation):
+    """Merges two operations."""
+    existing_operation.price = average_price(
+        existing_operation.quantity,
+        existing_operation.price,
+        operation.quantity,
+        operation.price
+    )
+    existing_operation.quantity += operation.quantity
+
+
+def daytrade_condition(operation_a, operation_b):
+    """Checks if two operations are day trades."""
+    return (
+        operation_a.subject.symbol == operation_b.subject.symbol and
+        not same_sign(operation_a.quantity, operation_b.quantity)
+    )
+
+
+def find_purchase_and_sale(operation_a, operation_b):
+    """Finds which operation is a purchase and which is a sale."""
+    if operation_b.quantity > operation_a.quantity:
+        return operation_b, operation_a
+    return operation_a, operation_b

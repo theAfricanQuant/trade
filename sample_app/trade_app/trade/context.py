@@ -31,11 +31,11 @@ from __future__ import division
 
 import copy
 
-from . utils import (
+from . daytrade import (
+    Daytrade,
     merge_operations,
     daytrade_condition
 )
-from . daytrade import Daytrade
 
 
 class Context(object):
@@ -59,12 +59,13 @@ class Context(object):
         self.operations = raw_operations
 
 
+# Default context rules:
+
 def find_volume(container):
     """Find the volume of the operations in the container."""
     container.context['volume'] = sum(
         operation.volume for operation in container.operations
     )
-
 
 def group_positions(container):
     """Group the container operations with the same asset."""
@@ -73,12 +74,10 @@ def group_positions(container):
     for operation in container.operations:
         group_position(container, operation)
 
-
 def group_position(container, operation):
     """Group one operation in the container positions."""
     if operation.quantity != 0 and operation.update_container:
         add_to_position_group(container, operation)
-
 
 def add_to_position_group(container, operation):
     """Adds an operation to the common operations list."""
@@ -94,7 +93,6 @@ def add_to_position_group(container, operation):
         container.context['positions']\
             ['operations'][operation.subject.symbol] = operation
 
-
 def fetch_daytrades(container):
     """An OperationContainer task.
 
@@ -105,7 +103,6 @@ def fetch_daytrades(container):
     """
     for index, operation in enumerate(container.operations):
         find_daytrade_pair(index, operation, container)
-
 
 def find_daytrade_pair(operation_a_index, operation_a, container):
     """Search for possible daytrade pairs for a operation.
@@ -119,7 +116,6 @@ def find_daytrade_pair(operation_a_index, operation_a, container):
         ]:
         Daytrade(operation_a, operation_b).append_to_positions(container)
 
-
 def prorate_commissions(container):
     """Prorates the container's commissions by its operations.
 
@@ -132,7 +128,6 @@ def prorate_commissions(container):
             for position in position_value.values():
                 prorate(container, position)
 
-
 def prorate(container, position):
     """Prorate the commissions for one position."""
     if position.update_position:
@@ -140,7 +135,6 @@ def prorate(container, position):
     else:
         for operation in position.operations:
             prorate_commissions_by_position(container, operation)
-
 
 def prorate_commissions_by_position(container, operation):
     """Prorates the commissions of the container for one position.
@@ -152,7 +146,6 @@ def prorate_commissions_by_position(container, operation):
         percent = operation.volume / container.context['volume'] * 100
         for key, value in container.commissions.items():
             operation.commissions[key] = value * percent / 100
-
 
 def can_prorate_commission(container, operation):
     """Check if the commissions can be divided by the positions or not."""

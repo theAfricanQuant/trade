@@ -26,10 +26,6 @@ from __future__ import division
 
 import math
 
-from . utils import (
-    average_price,
-    same_sign
-)
 
 class Occurrence(object):
     """An occurrence with a subject in a date.
@@ -178,3 +174,15 @@ class Occurrence(object):
         accumulator.state['quantity'] = new_quantity
         if not accumulator.state['quantity']:
             accumulator.state['price'] = 0
+
+
+
+def average_price(quantity_1, price_1, quantity_2, price_2):
+    """Calculates the average price between two asset states."""
+    return (quantity_1 * price_1 + quantity_2 * price_2) / \
+            (quantity_1 + quantity_2)
+
+
+def same_sign(number_1, number_2):
+    """Checks if two numbers have the same sign."""
+    return (number_1 >= 0) ^ (number_2 < 0)
