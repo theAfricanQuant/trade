@@ -24,7 +24,6 @@ THE SOFTWARE.
 import copy
 
 
-
 class Holder(object):
     """A holder of subjects.
 
@@ -57,7 +56,6 @@ class Holder(object):
                 occurrence.subject
             )
         self.subjects[occurrence.subject.symbol].accumulate(occurrence)
-
 
 
 class Accumulator(object):

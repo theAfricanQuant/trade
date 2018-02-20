@@ -69,7 +69,6 @@ class Occurrence(object):
     update_container = True
 
     def __init__(self, subject=None, date=None, **kwargs):
-        #super(Operation, self).__init__(subject, date)
         self.subject = subject
         self.date = date
         self.quantity = kwargs.get('quantity', 0)

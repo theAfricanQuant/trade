@@ -71,7 +71,7 @@ You can try it `live <https://python-trade.appspot.com>`_.
 Quickstart
 ----------
 
-An example of the JSON interfacem using the **fetch_daytrades** context rule:
+An example of the JSON interface using the **fetch_daytrades** context rule:
 
 .. code:: python
     
