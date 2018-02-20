@@ -1,10 +1,10 @@
-"""trade: Financial Application Framework
+"""trade example
 
 http://trade.readthedocs.org/
 https://github.com/rochars/trade
 License: MIT
 
-Copyright (c) 2016 Rafael da Silva Rocha
+Copyright (c) 2016-2018 Rafael da Silva Rocha
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -25,15 +25,17 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 """
 
-from trade import trade
+from trade import context
+from trade.subject import Subject
+from trade.occurrence import Occurrence
 from trade.trade_json import TradeJSON
 
 
 interface = TradeJSON(
-    [trade.fetch_daytrades],
+    [context.fetch_daytrades],
     {
-        'Asset': trade.Asset,
-        'Operation': trade.Operation,
+        'Asset': Subject,
+        'Operation': Occurrence,
     }
 )
 

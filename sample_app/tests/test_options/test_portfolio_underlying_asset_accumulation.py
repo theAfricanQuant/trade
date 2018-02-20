@@ -23,7 +23,7 @@ class TestPortfolio(unittest.TestCase):
     state = {}
 
     def setUp(self):
-        self.portfolio = accumulator.Portfolio(state=self.initial_state)
+        self.portfolio = accumulator.Holder(state=self.initial_state)
         for operation in self.operations:
             self.portfolio.accumulate(copy.deepcopy(operation))
 

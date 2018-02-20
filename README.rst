@@ -41,8 +41,6 @@ A *subject* may be the share of a corporation, wooden logs, livestock and so on.
 
 An occurrence involves one or many subjects
 -------------------------------------------
-A *occurrence* may be the purchase of shares of a corporation, updating the holder's
-situation.
 
 
 A subject may relate to none or many subjects
@@ -53,11 +51,11 @@ for example); Occurrences with this subject may have effects on its underlying s
 
 A *context* may have its own rules
 ----------------------------------
-*Contexts* are groups of operations.
+*Contexts* are groups of occurrences.
 
 A *context* may be a situation where daytrades should be identified.
 
-A *context* may also involve taxes and other costs altering the value of the trades.
+A *context* may also involve taxes and other costs altering the details of the occurrences.
 
 
 Extending the framework
@@ -76,16 +74,18 @@ Quickstart
 An example of the JSON interfacem using the **fetch_daytrades** context rule:
 
 .. code:: python
-
-    from trade import trade
+    
+    from trade import context
+    from trade.subject import Subject
+    from trade.occurrence import Occurrence
     from trade.trade_json import TradeJSON
 
 
     interface = TradeJSON(
-        [trade.fetch_daytrades],
+        [context.fetch_daytrades],
         {
-            'Asset': trade.Asset,
-            'Operation': trade.Operation,
+            'Asset': Subject,
+            'Operation': Occurrence,
         }
     )
 
@@ -203,12 +203,6 @@ An example of the JSON interfacem using the **fetch_daytrades** context rule:
     #    }
     #  }
     #}
-
-
-Compatibility
--------------
-
-trade is compatible with Python 2.7, 3.3, 3.4, 3.5 and 3.6.
 
 
 License

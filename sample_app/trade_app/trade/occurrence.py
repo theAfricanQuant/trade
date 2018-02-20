@@ -1,6 +1,6 @@
 """Occurrence
 
-Copyright (c) 2015-2017 Rafael da Silva Rocha
+Copyright (c) 2015-2018 Rafael da Silva Rocha
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -28,9 +28,7 @@ import math
 
 from . utils import (
     average_price,
-    same_sign,
-    merge_operations,
-    find_purchase_and_sale
+    same_sign
 )
 
 class Occurrence(object):
@@ -45,8 +43,8 @@ class Occurrence(object):
             update the context in a OperationContainer or not.
 
     Attributes:
-        date: A string 'YYYY-mm-dd', the date the operation occurred.
         subject: An Asset instance, the asset that is being traded.
+        date: A string 'YYYY-mm-dd', the date the operation occurred.
         quantity: A number representing the quantity being traded.
             Positive quantities represent a purchase.
             Negative quantities represent a sale.
@@ -83,10 +81,8 @@ class Occurrence(object):
     def update_portfolio(self, portfolio):
         """Should udpate the portfolio state.
 
-        This is method is called by the Portfolio object when it accumulates
-        the Occurrence. It is called before the accumulation occurs, so the
-        Occurrence is free to manipulate the Portfolio data before it is passed
-        to its subject corresponding Accumulator.
+        This method is called by the Holder. The Occurrence is free to
+        manipulate the Holder subjects before it is passed to its Accumulator.
         """
         pass
 

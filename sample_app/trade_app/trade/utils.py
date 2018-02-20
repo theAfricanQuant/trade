@@ -59,4 +59,3 @@ def find_purchase_and_sale(operation_a, operation_b):
     if operation_b.quantity > operation_a.quantity:
         return operation_b, operation_a
     return operation_a, operation_b
-
