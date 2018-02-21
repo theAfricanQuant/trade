@@ -30,8 +30,8 @@ from __future__ import absolute_import
 
 import json
 
-from . holder import Holder
-from . context import Context
+from . trade.holder import Holder
+from . trade.context import Context
 
 
 class TradeJSON(object):

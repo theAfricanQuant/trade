@@ -4,10 +4,10 @@ from __future__ import absolute_import
 import unittest
 import json
 
-from trade.trade_json import TradeJSON
-from trade.occurrence import Occurrence as Operation
-from trade.subject import Subject as Asset
-from trade.context import fetch_daytrades, group_positions, find_volume
+from trade_app.trade_json import TradeJSON
+from trade_app.trade.occurrence import Occurrence as Operation
+from trade_app.trade.subject import Subject as Asset
+from trade_app.trade.context import fetch_daytrades, group_positions, find_volume
 
 
 class TestJSON(unittest.TestCase):

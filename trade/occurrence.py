@@ -39,14 +39,13 @@ class Occurrence(object):
             update the context in a OperationContainer or not.
 
     Attributes:
-        subject: An Asset instance, the asset that is being traded.
+        subject: A Subject instance.
         date: A string 'YYYY-mm-dd', the date the operation occurred.
         quantity: A number representing the quantity being traded.
             Positive quantities represent a purchase.
             Negative quantities represent a sale.
         price: The raw unitary price of the asset being traded.
-        commissions: A dict of discounts. String keys and float values
-            representing the name of the discounts and the values
+        commissions: A dict of discounts.
             to be deducted added to the the operation value.
         operations: A list of underlying occurrences that the
             might may have.
