@@ -25,6 +25,9 @@ holder.accumulate(some_occurrence)
 for subject, subject_details in holder.subjects.items():
 	print(subject)
 	print(subject_details.state)
+# AST1
+# {'price': 20.0, 'results': {}, 'quantity': 100}
+
 
 # create some other occurrence with that subject.
 # In this example, a sale of 20 units of the asset,
@@ -42,6 +45,8 @@ holder.accumulate(other_occurrence)
 for subject, subject_details in holder.subjects.items():
 	print(subject)
 	print(subject_details.state)
+# AST1
+# {'price': 20.0, 'results': {'trades': 200.0}, 'quantity': 80}
 
 
 # create some other occurrence with that subject.
@@ -60,3 +65,5 @@ holder.accumulate(another_occurrence)
 for subject, subject_details in holder.subjects.items():
 	print(subject)
 	print(subject_details.state)
+# AST1
+# {'price': 20.555555555555557, 'results': {'trades': 200.0}, 'quantity': 90}

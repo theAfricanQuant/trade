@@ -102,6 +102,9 @@ A example without the use of contexts:
 	for subject, subject_details in holder.subjects.items():
 		print(subject)
 		print(subject_details.state)
+	# AST1
+	# {'price': 20.0, 'results': {}, 'quantity': 100}
+
 
 	# create some other occurrence with that subject.
 	# In this example, a sale of 20 units of the asset,
@@ -119,6 +122,8 @@ A example without the use of contexts:
 	for subject, subject_details in holder.subjects.items():
 		print(subject)
 		print(subject_details.state)
+	# AST1
+	# {'price': 20.0, 'results': {'trades': 200.0}, 'quantity': 80}
 
 
 	# create some other occurrence with that subject.
@@ -133,11 +138,12 @@ A example without the use of contexts:
 	holder.accumulate(another_occurrence)
 
 	# check the holder state. It should show a change in quantity
-	# and in the value of the subject:
+	# and in the price paid for each unit of the subject:
 	for subject, subject_details in holder.subjects.items():
 		print(subject)
 		print(subject_details.state)
-
+	# AST1
+	# {'price': 20.555555555555557, 'results': {'trades': 200.0}, 'quantity': 90}
 
 
 License
