@@ -36,7 +36,7 @@ class TestFetchPositions(unittest.TestCase):
             operations=copy.deepcopy(self.operations)
         )
         self.container.commissions = self.commissions
-        self.container.fetch_positions()
+        self.container.fetch_occurrences()
         prorate_commissions(self.container)
 
         self.state = {
@@ -47,21 +47,21 @@ class TestFetchPositions(unittest.TestCase):
 
     def test_container_volume(self):
         """Check the volume of the OperationContainer."""
-        self.assertEqual(self.container.context['volume'], self.volume)
+        self.assertEqual(self.container.data['volume'], self.volume)
 
     def len_check(self, len_type):
         """Check the len of a type of position in the container."""
-        if len_type in self.container.context['positions']:
+        if len_type in self.container.data['occurrences']:
             self.assertEqual(
-                len(self.container.context['positions'][len_type].keys()),
+                len(self.container.data['occurrences'][len_type].keys()),
                 len(self.state[len_type].keys())
             )
 
     def state_check(self, position_type):
         """Check the state of a type of position in the container."""
-        if 'positions' in self.container.context:
-            if position_type in self.container.context['positions']:
-                for position in self.container.context['positions'][position_type].values():
+        if 'occurrences' in self.container.data:
+            if position_type in self.container.data['occurrences']:
+                for position in self.container.data['occurrences'][position_type].values():
                     position_details = position.__dict__
                     for key in position_details:
                         if key in \
@@ -109,11 +109,11 @@ class TestFetchPositions(unittest.TestCase):
         for asset in self.daytrades.keys():
             self.assertEqual(
                 (
-                    self.container.context['positions']['daytrades'][asset]\
+                    self.container.data['occurrences']['daytrades'][asset]\
                         .operations[operation_index].price,
-                    self.container.context['positions']['daytrades'][asset]\
+                    self.container.data['occurrences']['daytrades'][asset]\
                         .operations[operation_index].quantity,
-                    self.container.context['positions']['daytrades'][asset]\
+                    self.container.data['occurrences']['daytrades'][asset]\
                         .operations[operation_index].commissions,
                 ),
                 (

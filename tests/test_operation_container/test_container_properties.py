@@ -23,10 +23,10 @@ class TestContainerProperties(unittest.TestCase):
             operations=copy.deepcopy(self.operations),
             tasks=[find_volume]
         )
-        self.container.fetch_positions()
+        self.container.fetch_occurrences()
 
     def test_volume_00(self):
-        self.assertEqual(self.container.context['volume'], self.volume)
+        self.assertEqual(self.container.data['volume'], self.volume)
 
 
 class TestContainerPropertiesCase00(TestContainerProperties):

@@ -99,24 +99,24 @@ class Daytrade(Occurrence):
         If there is already a day trade with the same asset on the
         container, then the day trades are merged.
         """
-        if 'positions' not in container.context:
-            container.context['positions'] = {}
+        if 'occurrences' not in container.data:
+            container.data['occurrences'] = {}
 
-        if 'daytrades' not in container.context['positions']:
-            container.context['positions']['daytrades'] = {}
+        if 'daytrades' not in container.data['occurrences']:
+            container.data['occurrences']['daytrades'] = {}
 
-        if self.subject.symbol in container.context['positions']['daytrades']:
+        if self.subject.symbol in container.data['occurrences']['daytrades']:
             self.merge_underlying(container, 0)
             self.merge_underlying(container, 1)
-            container.context['positions']['daytrades'][self.subject.symbol].quantity +=\
+            container.data['occurrences']['daytrades'][self.subject.symbol].quantity +=\
                 self.quantity
         else:
-            container.context['positions']['daytrades'][self.subject.symbol] = self
+            container.data['occurrences']['daytrades'][self.subject.symbol] = self
 
     def merge_underlying(self, container, operation_index):
         """Merges one day trade underlying operation."""
         merge_operations(
-            container.context['positions']['daytrades'][self.subject.symbol]\
+            container.data['occurrences']['daytrades'][self.subject.symbol]\
                 .operations[operation_index],
             self.operations[operation_index]
         )

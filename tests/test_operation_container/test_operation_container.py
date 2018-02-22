@@ -38,7 +38,7 @@ class TestContainerCreationCase01(unittest.TestCase):
         )
         self.container.commissions = COMMISSIONS12
         self.container.fetch_positions_tasks = [fetch_daytrades]
-        self.container.fetch_positions()
+        self.container.fetch_occurrences()
 
     def test_container_exists(self):
         self.assertTrue(self.container)

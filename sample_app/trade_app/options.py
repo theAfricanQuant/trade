@@ -174,17 +174,17 @@ def fetch_exercises(container):
     exercise (by asset) on the container positions dictionary under
     the key 'exercises'.
     """
-    if 'positions' not in container.context:
-        container.context['positions'] = {}
+    if 'occurrences' not in container.data:
+        container.data['occurrences'] = {}
     for operation in container.operations:
         if isinstance(operation, Exercise):
-            if 'exercises' not in container.context['positions']:
-                container.context['positions']['exercises'] = {}
+            if 'exercises' not in container.data['occurrences']:
+                container.data['occurrences']['exercises'] = {}
             symbol = operation.subject.symbol
-            if symbol in container.context['positions']['exercises'].keys():
+            if symbol in container.data['occurrences']['exercises'].keys():
                 merge_operations(
-                    container.context['positions']['exercises'][symbol],
+                    container.data['occurrences']['exercises'][symbol],
                     operation
                 )
             else:
-                container.context['positions']['exercises'][symbol] = operation
+                container.data['occurrences']['exercises'][symbol] = operation

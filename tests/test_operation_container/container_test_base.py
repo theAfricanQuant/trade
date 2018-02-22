@@ -36,7 +36,7 @@ class TestFetchPositions(unittest.TestCase):
             self.volume = sum(
                 operation.volume for operation in self.container.operations
             )
-        self.container.fetch_positions()
+        self.container.fetch_occurrences()
         self.state = {
             'operations': self.positions,
             'exercises': self.exercises,
@@ -45,21 +45,21 @@ class TestFetchPositions(unittest.TestCase):
 
     def test_container_volume(self):
         """Check the volume of the OperationContainer."""
-        self.assertEqual(self.container.context['volume'], self.volume)
+        self.assertEqual(self.container.data['volume'], self.volume)
 
     def len_check(self, len_type):
         """Check the len of a type of position in the container."""
-        if 'positions' in self.container.context:
-            if len_type in self.container.context['positions']:
+        if 'occurrences' in self.container.data:
+            if len_type in self.container.data['occurrences']:
                 self.assertEqual(
-                    len(self.container.context['positions'][len_type].keys()),
+                    len(self.container.data['occurrences'][len_type].keys()),
                     len(self.state[len_type].keys())
                 )
 
     def state_check(self, position_type):
         """Check the state of a type of position in the container."""
-        if position_type in self.container.context['positions']:
-            for position in self.container.context['positions']\
+        if position_type in self.container.data['occurrences']:
+            for position in self.container.data['occurrences']\
             [position_type].values():
                 position_details = position.__dict__
                 for key in position_details:
@@ -105,15 +105,15 @@ class TestFetchPositions(unittest.TestCase):
 
     def check_daytrade_suboperation(self, operation_index, operation_type):
         """Check the state of the daytrade suboperations."""
-        if 'daytrades' in self.container.context['positions']:
+        if 'daytrades' in self.container.data['occurrences']:
             for asset in self.daytrades.keys():
                 self.assertEqual(
                     (
-                        self.container.context['positions']['daytrades'][asset]\
+                        self.container.data['occurrences']['daytrades'][asset]\
                             .operations[operation_index].price,
-                        self.container.context['positions']['daytrades'][asset]\
+                        self.container.data['occurrences']['daytrades'][asset]\
                             .operations[operation_index].quantity,
-                        self.container.context['positions']['daytrades'][asset]\
+                        self.container.data['occurrences']['daytrades'][asset]\
                             .operations[operation_index].commissions,
                     ),
                     (

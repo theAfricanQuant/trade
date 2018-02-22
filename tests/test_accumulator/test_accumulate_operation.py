@@ -44,10 +44,10 @@ class TestAccumulateOperationCase01(LogTest):
             tasks=[find_volume, group_positions, prorate_commissions]
         )
         container.commissions = COMMISSIONS13
-        container.fetch_positions()
-        if 'positions' in container.context:
+        container.fetch_occurrences()
+        if 'occurrences' in container.data:
             self.occurrences = [
-                container.context['positions']['operations'][ASSET.symbol]
+                container.data['occurrences']['operations'][ASSET.symbol]
             ]
         super(TestAccumulateOperationCase01, self).setUp()
 
@@ -62,10 +62,10 @@ class TestAccumulateOperationCase02(LogTest):
             operations=[copy.deepcopy(OPERATION20)],
             tasks=[find_volume, group_positions]
         )
-        container.fetch_positions()
-        if 'positions' in container.context:
+        container.fetch_occurrences()
+        if 'occurrences' in container.data:
             self.occurrences = [
-                container.context['positions']['operations'][ASSET.symbol]
+                container.data['occurrences']['operations'][ASSET.symbol]
             ]
         super(TestAccumulateOperationCase02, self).setUp()
 
@@ -80,10 +80,10 @@ class TestAccumulateOperationCase03(LogTest):
             operations=[copy.deepcopy(OPERATION19)],
             tasks=[find_volume, group_positions]
         )
-        container.fetch_positions()
-        if 'positions' in container.context:
+        container.fetch_occurrences()
+        if 'occurrences' in container.data:
             self.occurrences = [
-                container.context['positions']['operations'][ASSET.symbol],
+                container.data['occurrences']['operations'][ASSET.symbol],
                 copy.deepcopy(OPERATION21)
             ]
         super(TestAccumulateOperationCase03, self).setUp()

@@ -132,14 +132,14 @@ class TradeJSON(object):
     def accumulate_positions(self):
         """Accumulate each container position on the portoflio."""
         for key in sorted(self.containers.keys()):
-            self.containers[key].fetch_positions()
-            if 'positions' in self.containers[key].context:
+            self.containers[key].fetch_occurrences()
+            if 'occurrences' in self.containers[key].data:
                 self.accumulate_position(key)
 
     def accumulate_position(self, key):
         """Accumulate one position in the portfolio."""
         for position_type, position_asset in \
-            self.containers[key].context['positions'].items():
+            self.containers[key].data['occurrences'].items():
             for asset_symbol, position in position_asset.items():
                 self.holder.accumulate(position)
                 if position_type == 'daytrades':

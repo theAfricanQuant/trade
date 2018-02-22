@@ -3,8 +3,8 @@
 
 def find_trading_fees_for_positions(container):
     """Finds the fees for all positions in the container."""
-    if 'positions' in container.context:
-        for position_type, position_value in container.context['positions'].items():
+    if 'occurrences' in container.data:
+        for position_type, position_value in container.data['occurrences'].items():
             for position in position_value.values():
                 if position.operations:
                     for operation in position.operations:

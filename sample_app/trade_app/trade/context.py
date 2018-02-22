@@ -44,9 +44,9 @@ class Context(object):
     def __init__(self, operations, tasks):
         self.operations = operations
         self.tasks = tasks
-        self.context = {}
+        self.data = {}
 
-    def fetch_positions(self):
+    def fetch_occurrences(self):
         """Run the the methods defined in self.tasks.
 
         This method executes all the methods defined in self.tasks
@@ -63,14 +63,14 @@ class Context(object):
 
 def find_volume(container):
     """Find the volume of the operations in the container."""
-    container.context['volume'] = sum(
+    container.data['volume'] = sum(
         operation.volume for operation in container.operations
     )
 
 def group_positions(container):
     """Group the container operations with the same asset."""
-    if 'positions' not in container.context:
-        container.context['positions'] = {}
+    if 'occurrences' not in container.data:
+        container.data['occurrences'] = {}
     for operation in container.operations:
         group_position(container, operation)
 
@@ -81,16 +81,16 @@ def group_position(container, operation):
 
 def add_to_position_group(container, operation):
     """Adds an operation to the common operations list."""
-    if 'operations' not in container.context['positions']:
-        container.context['positions']['operations'] = {}
-    if operation.subject.symbol in container.context['positions']['operations']:
+    if 'operations' not in container.data['occurrences']:
+        container.data['occurrences']['operations'] = {}
+    if operation.subject.symbol in container.data['occurrences']['operations']:
         merge_operations(
-            container.context['positions']\
+            container.data['occurrences']\
                 ['operations'][operation.subject.symbol],
             operation
         )
     else:
-        container.context['positions']\
+        container.data['occurrences']\
             ['operations'][operation.subject.symbol] = operation
 
 def fetch_daytrades(container):
@@ -123,8 +123,8 @@ def prorate_commissions(container):
     container. The total discount value is then prorated by the
     position operations based on their volume.
     """
-    if 'positions' in container.context:
-        for position_value in container.context['positions'].values():
+    if 'occurrences' in container.data:
+        for position_value in container.data['occurrences'].values():
             for position in position_value.values():
                 prorate(container, position)
 
@@ -143,12 +143,12 @@ def prorate_commissions_by_position(container, operation):
     the position operation.
     """
     if can_prorate_commission(container, operation):
-        percent = operation.volume / container.context['volume'] * 100
+        percent = operation.volume / container.data['volume'] * 100
         for key, value in container.commissions.items():
             operation.commissions[key] = value * percent / 100
 
 def can_prorate_commission(container, operation):
     """Check if the commissions can be divided by the positions or not."""
-    if 'volume' in container.context:
-        if operation.volume != 0 and container.context['volume'] != 0:
+    if 'volume' in container.data:
+        if operation.volume != 0 and container.data['volume'] != 0:
             return True
