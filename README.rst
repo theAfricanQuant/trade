@@ -23,7 +23,7 @@ trade
 
 It uses the concept of *holders*, *subjects*, *occurrences* and *contexts*
 --------------------------------------------------------------------------
-A *subject* represent anything that can be traded.
+A *subject* is anything that can be traded.
 
 A *holder* is someone who owns subjects.
 
@@ -45,9 +45,9 @@ is updated by occurrences.
 
 *Occurrences* happen with subjects and change the state of the Holder
 ---------------------------------------------------------------------
-A Occurrence may be caused by the Holder, like a the purchase of units of some
-subject, or caused by a factor outside the Holder's will, like a stock split.
-In both cases it changes the state of the Holder.
+A Occurrence may be caused by the Holder, like the purchase of units of some
+subject. They can also represent third-party events, like a stock split.
+In both cases they should change the state of the Holder.
 
 
 A *context* may have its own rules
@@ -65,7 +65,10 @@ Extending the framework
 -----------------------
 
 **trade** should be extended with new types of *occurrences* and *subjects*.
+
 New *context rules* can be created.
+
+The *holder* state can be modeled according to the needs of the application.
 
 Look at the examples.
 
@@ -74,10 +77,17 @@ Live sample app
 ---------------
 You can try it `live <https://python-trade.appspot.com>`_.
 
-This is a sample app built with **trade**. It runs as a service; the input
-is a JSON containing trade information and the service identify daytrades,
-calculates the profits and losses from the occurrences, group results by
-asset and more, then outputs the Holder state as a JSON.
+This is a sample app built with **trade**. It runs as a service.
+
+The input is a JSON containing trade information.
+
+It have *context tasks* to identify daytrades, apply costs to occurrences
+and more.
+
+The service also calculates the profits and losses from the occurrences and
+group the results by asset.
+
+The output is the *holder* state as a JSON.
 
 
 Use:
@@ -160,7 +170,6 @@ A example without the use of contexts:
 		print(state)
 	# AST1
 	# {'price': 20.555555555555557, 'quantity': 90}
-
 
 
 License

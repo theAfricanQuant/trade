@@ -94,7 +94,7 @@ class Occurrence(object):
             holder.state[subject_symbol]['quantity'] += self.details['quantity']
 
         # If the Holder don't have a state with this occurrence's Subject,
-        # then register this occurrence as the first state of the Subject 
+        # then register this occurrence as the first state of the Subject
         # in the Holder's possession
         else:
             holder.state[subject_symbol] = {
