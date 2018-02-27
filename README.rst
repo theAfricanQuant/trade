@@ -84,7 +84,7 @@ The sample app have *context tasks* to identify daytrades, apply
 costs to occurrences and more.
 
 The service also calculates the profits and losses from the occurrences
-and group the results by asset.
+and groups the results by asset.
 
 The output is the *holder* state as a JSON.
 
