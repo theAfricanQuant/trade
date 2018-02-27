@@ -1,4 +1,4 @@
-"""Tests for the Subject class."""
+"""Tests for the Occurrence class."""
 
 from __future__ import absolute_import
 import unittest

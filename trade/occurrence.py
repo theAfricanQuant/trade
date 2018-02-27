@@ -36,7 +36,7 @@ class Occurrence(object):
     Attributes:
         subject: A Subject instance.
         date: A string to represent the moment of the occurrence.
-        details: A dictionary with the occurrence details.
+        details: A dict with the occurrence details.
     """
 
     def __init__(self, subject, date, details):
@@ -56,13 +56,19 @@ class Occurrence(object):
         from this class are passed to Holder.trade().
 
         This sample implementation considers the following signature for
-        the Holder.state dictionary:
+        the Holder.state dict:
             {
                 "SUBJECT SYMBOL": {
                     "quantity": 0,
                     "value": 0
                 },
                 ...
+            }
+
+        And the following signature for the Occurrance.details dict:
+            {
+                "quantity": 0,
+                "value": 0
             }
         """
 

@@ -34,10 +34,11 @@ class Subject(object):
 
     Attributes:
         symbol: A string to identify the subject.
-        details: A dictionary with any additional data
-        	regarding the subject.
+        details: A dict with additional data. Optional.
     """
 
-    def __init__(self, symbol, details):
+    def __init__(self, symbol, details=None):
         self.symbol = symbol
-        self.details = details
+        self.details = {}
+        if details:
+        	self.details = details

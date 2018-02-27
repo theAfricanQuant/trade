@@ -27,7 +27,7 @@ A *subject* is anything that can be traded.
 
 A *holder* is someone who owns subjects.
 
-A *holder* state is update by *occurrences*.
+A *holder* state is updated by *occurrences*.
 
 *Occurrences* may occur alone or in *contexts*.
 
@@ -62,13 +62,9 @@ A *context* may also involve taxes and other costs altering the details of the o
 
 Extending the framework
 -----------------------
-**trade** should be extended with new types of *occurrences* and *subjects*.
+**trade** should be extended with new types of *occurrences*, *subjects* and *context rules*.
 
-New *context rules* can be created.
-
-The *holder* state can be modeled according to the needs of the application.
-
-Look at the examples.
+The *holder* state signature can be defined according to the needs of the application.
 
 
 Live sample app
@@ -91,7 +87,6 @@ The output is the *holder* state as a JSON.
 
 Use:
 ----
-A example without the use of contexts:
 
 .. code:: python
 
@@ -103,7 +98,7 @@ A example without the use of contexts:
 	holder = Holder()
 
 	# define some subject
-	some_asset = Subject('AST1', {})
+	some_asset = Subject('AST1')
 
 	# create an occurrence with that subject.
 	# In this example, a purchase of 100 units of the asset,
@@ -172,7 +167,6 @@ A example without the use of contexts:
 
 License
 -------
-
 Copyright (c) 2015-2018 Rafael da Silva Rocha
 
 Permission is hereby granted, free of charge, to any person obtaining a

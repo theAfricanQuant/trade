@@ -30,9 +30,8 @@ THE SOFTWARE.
 class Holder(object):
     """A class to represent a owner of subjects.
 
-    A Holder is created with a initial state regarding the subjects it
-    owns. The state of Holder is then updated by Occurrence objects by
-    calling Holder.trade(occurrence).
+    A Holder object is created with a initial state. The state of Holder
+    is then updated by Occurrence objects by calling Holder.trade(occurrence).
 
     trade apps should define the Holder.state signature according to
     their needs.

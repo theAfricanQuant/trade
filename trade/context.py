@@ -59,6 +59,11 @@ class Context(object):
     as regular occurrences.
 
     The original Occurrence list is not modified.
+
+    Attributes:
+        occurrences: A list of Occurrence objects.
+        tasks: A list of functions.
+        contextualized: A list of Occurrence objects.
     """
 
     def __init__(self, occurrences, tasks):

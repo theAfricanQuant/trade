@@ -6,7 +6,7 @@ from trade.subject import Subject
 holder = Holder()
 
 # define some subject
-some_asset = Subject('AST1', {})
+some_asset = Subject('AST1')
 
 # create an occurrence with that subject.
 # In this example, a purchase of 100 units of the asset,

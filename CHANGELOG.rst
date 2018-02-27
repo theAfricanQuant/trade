@@ -1,8 +1,12 @@
 Change Log
 ==========
 
-1.0.0
------
+1.1.0 (2017-02-27)
+------------------
+* "details" as a optional argument for Subject creation. Empty dict assumed as default.
+
+1.0.0 (2017-02-27)
+------------------
 * Core framework apart from example implementations.
 
 0.4 (2017-12-03)
