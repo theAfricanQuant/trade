@@ -10,7 +10,7 @@ some_asset = Subject('AST1', {})
 
 # create an occurrence with that subject.
 # In this example, a purchase of 100 units of the asset,
-# for the price of $20.
+# for the value of $20.
 some_occurrence = Occurrence(
 		some_asset,
 		'2018-01-02',
@@ -33,7 +33,7 @@ for subject, state in holder.state.items():
 
 # create some other occurrence with that subject.
 # In this example, a sale of 20 units of the asset,
-# for the price of $30.
+# for the value of $30.
 holder.trade(Occurrence(
 		some_asset,
 		'2018-01-03',
@@ -49,12 +49,12 @@ for subject, state in holder.state.items():
 	print(subject)
 	print(state)
 # AST1
-# {'price': 20.0, 'quantity': 80}
+# {'value': 20.0, 'quantity': 80}
 
 
 # create some other occurrence with that subject.
 # Now a purchase of 10 units of the asset, for the
-# price of $20.
+# value of $20.
 holder.trade(Occurrence(
 		some_asset,
 		'2018-01-04',
@@ -70,4 +70,4 @@ for subject, state in holder.state.items():
 	print(subject)
 	print(state)
 # AST1
-# {'price': 20.555555555555557, 'quantity': 90}
+# {'value': 20.555555555555557, 'quantity': 90}
