@@ -34,7 +34,7 @@ import copy
 
 class Context(object):
     """A class to group occurrences and contextualize them.
-    
+
     To contextualize a group of occurrences could be:
     - To identify daytrades and separate them into different occurrences
       for taxation purposes
@@ -68,7 +68,7 @@ class Context(object):
 
     def apply(self):
         """Apply the rules of the context to its occurrences.
-    
+
         This method executes all the functions defined in
         self.tasks in the order they are listed.
 

@@ -26,8 +26,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 """
 
-import copy
-
 
 class Holder(object):
     """A class to represent a owner of subjects.
@@ -52,7 +50,6 @@ class Holder(object):
                 },
                 ...
             }
-            
     """
 
     def __init__(self, state=None):

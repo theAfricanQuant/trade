@@ -29,8 +29,6 @@ THE SOFTWARE.
 from __future__ import absolute_import
 from __future__ import division
 
-import math
-
 
 class Occurrence(object):
     """A class to represent occurrences with subjects.
