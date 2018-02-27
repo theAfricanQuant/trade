@@ -32,29 +32,28 @@ A *holder* state is update by *occurrences*.
 *Occurrences* may occur alone or in *contexts*.
 
 
-A subject is anything that can be traded
-----------------------------------------
+A *subject* is anything that can be traded
+------------------------------------------
 A *subject* may be the share of a corporation, livestock and so on.
 
 
-A Holder is a entity that owns subjects
----------------------------------------
-A Holder owns subjects. The Holder state regarding its subjects
-is updated by occurrences.
+A *holder* is a entity that owns subjects
+-----------------------------------------
+A *holder* owns subjects. The *holder* state is updated by occurrences.
 
 
-*Occurrences* happen with subjects and change the state of the Holder
----------------------------------------------------------------------
-A Occurrence may be caused by the Holder, like the purchase of units of some
-subject. They can also represent third-party events, like a stock split.
-In both cases they should change the state of the Holder.
+*Occurrences* happen with subjects and change the state of the *holder*
+-----------------------------------------------------------------------
+A Occurrence may be caused by the *holder*, like the purchase of units of some
+*subject*. They can also represent third-party events, like a stock split.
+In both cases they should change the state of the *holder*.
 
 
 A *context* may have its own rules
 ----------------------------------
 *Contexts* are groups of occurrences.
 
-*Contexts* are used to pre-process occurrences before informing them to a Holder.
+*Contexts* are used to pre-process occurrences before informing them to a *holder*.
 
 A *context* may be a situation where daytrades should be identified, for example.
 
@@ -79,13 +78,14 @@ You can try it `live <https://python-trade.appspot.com>`_.
 
 This is a sample app built with **trade**. It runs as a service.
 
-The input is a JSON containing trade information.
+The input is a JSON containing *occurrences* and a initial state
+for the *holder*.
 
-It have *context tasks* to identify daytrades, apply costs to occurrences
-and more.
+The sample app have *context tasks* to identify daytrades, apply
+costs to occurrences and more.
 
-The service also calculates the profits and losses from the occurrences and
-group the results by asset.
+The service also calculates the profits and losses from the occurrences
+and group the results by asset.
 
 The output is the *holder* state as a JSON.
 
