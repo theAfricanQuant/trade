@@ -1,5 +1,10 @@
 """Subject
 
+A class to represent a tradable unit.
+
+https://github.com/rochars/trade
+License: MIT
+
 Copyright (c) 2015-2018 Rafael da Silva Rocha
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -25,35 +30,14 @@ import copy
 
 
 class Subject(object):
-    """The subject of an occurrence.
+    """A class to represent a tradable unit.
 
     Attributes:
         symbol: A string to identify the subject.
-        name: A string representing a readable name for the subject.
-        expiration_date: A string 'YYYY-mm-dd' stating a expiration
-            date for the subject, if any.
-        default_state: a dictionary with the default state of the
-            subject.
-        underlying_assets: Underlying subject of this subject, if
-            any.
+        details: A dictionary with any additional data
+        	regarding the subject.
     """
 
-    default_state = default_state = {
-        'quantity': 0,
-        'price': 0,
-        'results': {}
-    }
-
-    def __init__(self, symbol=None, name=None, expiration_date=None, **kwargs):
+    def __init__(self, symbol, details):
         self.symbol = symbol
-        self.name = name
-        self.expiration_date = expiration_date
-        self.underlying_assets = kwargs.get('underlying_assets', {})
-
-    def get_default_state(self):
-        """Returns the default state of the subject."""
-        return copy.deepcopy(self.default_state)
-
-    def expire(self, accumulator):
-        """Expires the subject on the Holder portfolio."""
-        accumulator.state = self.get_default_state()
+        self.details = details

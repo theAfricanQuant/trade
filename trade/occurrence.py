@@ -1,5 +1,10 @@
 """Occurrence
 
+A class to represent occurrences with subjects.
+
+https://github.com/rochars/trade
+License: MIT
+
 Copyright (c) 2015-2018 Rafael da Silva Rocha
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -28,159 +33,87 @@ import math
 
 
 class Occurrence(object):
-    """An occurrence with a subject in a date.
-
-    Class Attributes:
-        update_position: A boolean indication if the operation should
-            update the position of the accumulator or not.
-        update_results: A boolean indication if the operation should
-            update the results of the accumulator or not.
-        update_container: A boolean indication if the operation should
-            update the context in a OperationContainer or not.
+    """A class to represent occurrences with subjects.
 
     Attributes:
         subject: A Subject instance.
-        date: A string 'YYYY-mm-dd', the date the operation occurred.
-        quantity: A number representing the quantity being traded.
-            Positive quantities represent a purchase.
-            Negative quantities represent a sale.
-        price: The raw unitary price of the asset being traded.
-        commissions: A dict of discounts.
-            to be deducted added to the the operation value.
-        operations: A list of underlying occurrences that the
-            might may have.
+        date: A string to represent the moment of the occurrence.
+        details: A dictionary with the occurrence details.
     """
 
-    # By default every operation
-    # updates the accumulator position
-    update_position = True
-
-    # By default every operation
-    # updates the accumulator results
-    update_results = True
-
-    # By default every operation updates
-    # the OperationContainer positions
-    update_container = True
-
-    def __init__(self, subject=None, date=None, **kwargs):
+    def __init__(self, subject, date, details):
         self.subject = subject
         self.date = date
-        self.quantity = kwargs.get('quantity', 0)
-        self.price = kwargs.get('price', 0)
-        self.commissions = kwargs.get('commissions', {})
-        self.raw_results = kwargs.get('raw_results', {})
-        self.operations = kwargs.get('operations', [])
+        self.details = details
 
-    def update_portfolio(self, portfolio):
-        """Should udpate the portfolio state.
+    def update_holder(self, holder):
+        """Udpate the Holder state according to the occurrence.
 
-        This method is called by the Holder. The Occurrence is free to
-        manipulate the Holder subjects before it is passed to its Accumulator.
+        This implementation is a example of how a Occurrence object
+        can update the Holder state; this method should be overriden
+        by classes that inherit from the Occurrence class.
+
+        This sample implementation simply update the quantity and the average
+        price of the Subject in the Holder's possession every time objects
+        from this class are passed to Holder.trade().
+
+        This sample implementation considers the following signature for
+        the Holder.state dictionary:
+            {
+                "SUBJECT SYMBOL": {
+                    "quantity": 0,
+                    "value": 0
+                },
+                ...
+            }
         """
-        pass
 
-    @property
-    def results(self):
-        """Returns the results associated with the operation."""
-        return self.raw_results
+        subject_symbol = self.subject.symbol
 
-    @property
-    def real_value(self):
-        """Returns the quantity * the real price of the operation."""
-        return self.quantity * self.real_price
+        # If the Holder already have a state regarding this Subject,
+        # update that state
+        if subject_symbol in holder.state:
 
-    @property
-    def real_price(self):
-        """Returns the real price of the operation.
+            # If the Holder have zero units of this subject, the average
+            # value paid/received for the subject is the value of the trade itself
+            if not holder.state[subject_symbol]['quantity']:
+                holder.state[subject_symbol]['value'] = self.details['value']
 
-        The real price is the price with all commission and costs
-        already deducted or added.
-        """
-        return self.price + math.copysign(
-            self.total_commissions / self.quantity,
-            self.quantity
-        )
+            # If the Holder owns units of this subject then the average value
+            # paid/received for the subject may need to be updated with
+            # this occurrence details
+            elif same_sign(
+                    holder.state[subject_symbol]['quantity'],
+                    self.details['quantity']):
+                holder.state[subject_symbol]['value'] = average_price(
+                    holder.state[subject_symbol]['quantity'],
+                    holder.state[subject_symbol]['value'],
+                    self.details['quantity'],
+                    self.details['value']
+                )
 
-    @property
-    def total_commissions(self):
-        """Returns the sum of all commissions of this operation."""
-        return sum(self.commissions.values())
+            # Update the quantity of the subject in the Holder's posession
+            holder.state[subject_symbol]['quantity'] += self.details['quantity']
 
-    @property
-    def volume(self):
-        """Returns the quantity of the operation * its raw price."""
-        return abs(self.quantity) * self.price
-
-    def update_accumulator(self, accumulator):
-        """Updates the accumulator with the operation data."""
-        if self.need_position_update(accumulator):
-            self.update_positions(accumulator)
-        if self.update_results:
-            self.update_accumulator_results(accumulator)
-
-    def update_accumulator_results(self, accumulator):
-        """Updates the results stored in the accumulator."""
-        for key, value in self.results.items():
-            if key not in accumulator.state['results']:
-                accumulator.state['results'][key] = 0
-            accumulator.state['results'][key] += value
-
-    def need_position_update(self, accumulator):
-        """Check if there is a need to update the position."""
-        return (
-            self.subject.symbol == accumulator.subject.symbol and
-            self.quantity
-        )
-
-    def update_position_different_sign(self, accumulator, new_quantity):
-        """Update when the operation and position have opposing signs."""
-        # if we are trading more than the amount in the portfolio
-        # the result will be calculated based only on what was traded
-        # (the rest creates a new position)
-        if abs(self.quantity) > abs(accumulator.state['quantity']):
-            result_quantity = accumulator.state['quantity'] * -1
+        # If the Holder don't have a state with this occurrence's Subject,
+        # then register this occurrence as the first state of the Subject 
+        # in the Holder's possession
         else:
-            result_quantity = self.quantity
-        results = \
-            result_quantity * accumulator.state['price'] - \
-            result_quantity * self.real_price
-        if results:
-            self.results['trades'] = results
-        if not same_sign(accumulator.state['quantity'], new_quantity):
-            accumulator.state['price'] = self.real_price
+            holder.state[subject_symbol] = {
+                'quantity': self.details['quantity'],
+                'value': self.details['value']
+            }
 
-    def update_position_same_sign(self, accumulator):
-        """Update position when operation and position have the same sign."""
-        accumulator.state['price'] = average_price(
-            accumulator.state['quantity'],
-            accumulator.state['price'],
-            self.quantity,
-            self.real_price
-        )
-
-    def update_positions(self, accumulator):
-        """Updates the state of the asset with the operation data."""
-        new_quantity = accumulator.state['quantity'] + self.quantity
-        # same sign, udpate the cost
-        if same_sign(accumulator.state['quantity'], self.quantity):
-            self.update_position_same_sign(accumulator)
-        # different signs, update the results
-        elif accumulator.state['quantity'] != 0:
-            self.update_position_different_sign(accumulator, new_quantity)
-        else:
-            accumulator.state['price'] = self.real_price
-        accumulator.state['quantity'] = new_quantity
-        if not accumulator.state['quantity']:
-            accumulator.state['price'] = 0
-
-
+        # If the Holder knows about this Subject but don't have any unit
+        # of it, the paid value of the subject in the Holder state should
+        # be zero.
+        if not holder.state[subject_symbol]['quantity']:
+            holder.state[subject_symbol]['value'] = 0
 
 def average_price(quantity_1, price_1, quantity_2, price_2):
     """Calculates the average price between two asset states."""
     return (quantity_1 * price_1 + quantity_2 * price_2) / \
             (quantity_1 + quantity_2)
-
 
 def same_sign(number_1, number_2):
     """Checks if two numbers have the same sign."""

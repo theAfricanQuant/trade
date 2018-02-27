@@ -1,7 +1,7 @@
-"""trade
+"""Context
 
-trade: Financial Application Framework
-http://trade.readthedocs.org/
+A class to group occurrences and contextualize them.
+
 https://github.com/rochars/trade
 License: MIT
 
@@ -31,124 +31,56 @@ from __future__ import division
 
 import copy
 
-from . daytrade import (
-    Daytrade,
-    merge_operations,
-    daytrade_condition
-)
-
 
 class Context(object):
-    """A container for operations."""
+    """A class to group occurrences and contextualize them.
+    
+    To contextualize a group of occurrences could be:
+    - To identify daytrades and separate them into different occurrences
+      for taxation purposes
+    - Group occurrences with the same subject into one occurrence
+    - Apply costs and other deductions to the value to the occurrences
+    - Calculate taxes based on the occurrences in the context
 
-    def __init__(self, operations, tasks):
-        self.operations = operations
+    Objects from this class are created with both a list of occurrences and a
+    list of functions (called "context tasks").
+
+    The context tasks are run by calling Context.apply(). Context tasks
+    run in the order they are listed.
+
+    Every context task function receives one argument: the context itself. It
+    is then free to manipulate the raw occurrence data stored in the
+    Context.occurrences list.
+
+    The contextualized occurrence data is then stored in the
+    Context.contextualized list.
+
+    The occurrences in Context.contextualized should be informed to a Holder
+    as regular occurrences.
+
+    The original Occurrence list is not modified.
+    """
+
+    def __init__(self, occurrences, tasks):
+        self.occurrences = occurrences
         self.tasks = tasks
-        self.data = {}
+        self.contextualized = []
 
-    def fetch_occurrences(self):
-        """Run the the methods defined in self.tasks.
+    def apply(self):
+        """Apply the rules of the context to its occurrences.
+    
+        This method executes all the functions defined in
+        self.tasks in the order they are listed.
 
-        This method executes all the methods defined in self.tasks
-        in the order that they are listed, applying the context rules
-        to all operations in the context.
+        Every function that acts as a context task receives the
+        Context object itself as its only argument.
+
+        The contextualized occurrences are then stored in
+        Context.contextualized.
+
+        The original Occurrence instances are not modified.
         """
-        raw_operations = copy.deepcopy(self.operations)
+        raw_operations = copy.deepcopy(self.occurrences)
         for task in self.tasks:
             task(self)
-        self.operations = raw_operations
-
-
-# Default context rules:
-
-def find_volume(container):
-    """Find the volume of the operations in the container."""
-    container.data['volume'] = sum(
-        operation.volume for operation in container.operations
-    )
-
-def group_positions(container):
-    """Group the container operations with the same asset."""
-    if 'occurrences' not in container.data:
-        container.data['occurrences'] = {}
-    for operation in container.operations:
-        group_position(container, operation)
-
-def group_position(container, operation):
-    """Group one operation in the container positions."""
-    if operation.quantity != 0 and operation.update_container:
-        add_to_position_group(container, operation)
-
-def add_to_position_group(container, operation):
-    """Adds an operation to the common operations list."""
-    if 'operations' not in container.data['occurrences']:
-        container.data['occurrences']['operations'] = {}
-    if operation.subject.symbol in container.data['occurrences']['operations']:
-        merge_operations(
-            container.data['occurrences']\
-                ['operations'][operation.subject.symbol],
-            operation
-        )
-    else:
-        container.data['occurrences']\
-            ['operations'][operation.subject.symbol] = operation
-
-def fetch_daytrades(container):
-    """An OperationContainer task.
-
-    Fetches the daytrades from the OperationContainer operations.
-
-    The daytrades are placed on the container positions under the
-    'daytrades' key, inexed by the Daytrade asset's symbol.
-    """
-    for index, operation in enumerate(container.operations):
-        find_daytrade_pair(index, operation, container)
-
-def find_daytrade_pair(operation_a_index, operation_a, container):
-    """Search for possible daytrade pairs for a operation.
-
-    If a daytrade is found, a Daytrade object is created and appended
-    to the container positions.
-    """
-    for operation_b in [
-            x for x in container.operations[operation_a_index:] if\
-                daytrade_condition(x, operation_a)
-        ]:
-        Daytrade(operation_a, operation_b).append_to_positions(container)
-
-def prorate_commissions(container):
-    """Prorates the container's commissions by its operations.
-
-    This method sum the discounts in the commissions dict of the
-    container. The total discount value is then prorated by the
-    position operations based on their volume.
-    """
-    if 'occurrences' in container.data:
-        for position_value in container.data['occurrences'].values():
-            for position in position_value.values():
-                prorate(container, position)
-
-def prorate(container, position):
-    """Prorate the commissions for one position."""
-    if position.update_position:
-        prorate_commissions_by_position(container, position)
-    else:
-        for operation in position.operations:
-            prorate_commissions_by_position(container, operation)
-
-def prorate_commissions_by_position(container, operation):
-    """Prorates the commissions of the container for one position.
-
-    The ratio is based on the container volume and the volume of
-    the position operation.
-    """
-    if can_prorate_commission(container, operation):
-        percent = operation.volume / container.data['volume'] * 100
-        for key, value in container.commissions.items():
-            operation.commissions[key] = value * percent / 100
-
-def can_prorate_commission(container, operation):
-    """Check if the commissions can be divided by the positions or not."""
-    if 'volume' in container.data:
-        if operation.volume != 0 and container.data['volume'] != 0:
-            return True
+        self.occurrences = raw_operations

@@ -1,7 +1,8 @@
-"""trade: Financial Application Framework.
+"""trade
+
+A framework for financial applications.
 
 https://github.com/rochars/trade
-http://trade.readthedocs.org/
 License: MIT
 
 Copyright (c) 2015-2018 Rafael da Silva Rocha

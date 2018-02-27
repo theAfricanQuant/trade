@@ -1,6 +1,6 @@
 trade
 =====
-
+| A framework for financial applications.
 | Copyright (c) 2015-2018 Rafael da Silva Rocha
 | https://python-trade.appspot.com
 | https://github.com/rochars/trade
@@ -21,39 +21,42 @@ trade
 **trade** is a framework for the creation of financial applications.
 
 
-It uses the concept of *holders*, *subjects* and *occurrences*
---------------------------------------------------------------
+It uses the concept of *holders*, *subjects*, *occurrences* and *contexts*
+--------------------------------------------------------------------------
 A *subject* represent anything that can be traded.
 
-An *occurrence* represent anything that affects one or more subjects.
+A *holder* is someone who owns subjects.
 
-A *holder* is someone who owns subjects and may perform *occurrences*.
+A *holder* state is update by *occurrences*.
 
-*Occurrences* may happen without intervention of the holder.
-
-*Occurrences* may occur alone or in *contexts*, like a group of operations performed within a day.
+*Occurrences* may occur alone or in *contexts*.
 
 
-Different subjects may have different attributes
-------------------------------------------------
-A *subject* may be the share of a corporation, wooden logs, livestock and so on.
+A subject is anything that can be traded
+----------------------------------------
+A *subject* may be the share of a corporation, livestock and so on.
 
 
-An occurrence involves one or many subjects
--------------------------------------------
+A Holder is a entity that owns subjects
+---------------------------------------
+A Holder owns subjects. The Holder state regarding its subjects
+is updated by occurrences.
 
 
-A subject may relate to none or many subjects
----------------------------------------------
-The subject of an occurrence may be related to some underlyng subject (like it is with a *put option*,
-for example); Occurrences with this subject may have effects on its underlying subjects.
+*Occurrences* happen with subjects and change the state of the Holder
+---------------------------------------------------------------------
+A Occurrence may be caused by the Holder, like a the purchase of units of some
+subject, or caused by a factor outside the Holder's will, like a stock split.
+In both cases it changes the state of the Holder.
 
 
 A *context* may have its own rules
 ----------------------------------
 *Contexts* are groups of occurrences.
 
-A *context* may be a situation where daytrades should be identified.
+*Contexts* are used to pre-process occurrences before informing them to a Holder.
+
+A *context* may be a situation where daytrades should be identified, for example.
 
 A *context* may also involve taxes and other costs altering the details of the occurrences.
 
@@ -61,11 +64,20 @@ A *context* may also involve taxes and other costs altering the details of the o
 Extending the framework
 -----------------------
 
-**trade** can be extended with new types of *occurrences* and *subjects*.
-New *context rules* can be created. Look at the examples.
+**trade** should be extended with new types of *occurrences* and *subjects*.
+New *context rules* can be created.
+
+Look at the examples.
 
 
+Live sample app
+---------------
 You can try it `live <https://python-trade.appspot.com>`_.
+
+This is a sample app built with **trade**. It runs as a service; the input
+is a JSON containing trade information and the service identify daytrades,
+calculates the profits and losses from the occurrences, group results by
+asset and more, then outputs the Holder state as a JSON.
 
 
 Use:
@@ -83,113 +95,72 @@ A example without the use of contexts:
 	holder = Holder()
 
 	# define some subject
-	some_asset = Subject('AST1', 'Some Asset')
+	some_asset = Subject('AST1', {})
 
 	# create an occurrence with that subject.
 	# In this example, a purchase of 100 units of the asset,
 	# for the price of $20.
 	some_occurrence = Occurrence(
-			subject=some_asset,
-			date='2018-01-02',
-			quantity=100,
-			price=20
+			some_asset,
+			'2018-01-02',
+			{
+				"quantity": 100,
+				"value": 20
+			}
 		)
 
 	# pass it to the holder
-	holder.accumulate(some_occurrence)
+	holder.trade(some_occurrence)
 
 	# check the holder state:
-	for subject, subject_details in holder.subjects.items():
+	for subject, state in holder.state.items():
 		print(subject)
-		print(subject_details.state)
+		print(state)
 	# AST1
-	# {'price': 20.0, 'results': {}, 'quantity': 100}
+	# {'value': 20.0, 'quantity': 100}
 
 
 	# create some other occurrence with that subject.
 	# In this example, a sale of 20 units of the asset,
 	# for the price of $30.
-	other_occurrence = Occurrence(
-			subject=some_asset,
-			date='2018-01-02',
-			quantity=-20,
-			price=30
-		)
-	holder.accumulate(other_occurrence)
+	holder.trade(Occurrence(
+			some_asset,
+			'2018-01-03',
+			{
+				"quantity": -20,
+				"value": 30
+			}
+		))
 
 	# check the holder state. It should show a change in quantity
 	# and some profit:
-	for subject, subject_details in holder.subjects.items():
+	for subject, state in holder.state.items():
 		print(subject)
-		print(subject_details.state)
+		print(state)
 	# AST1
-	# {'price': 20.0, 'results': {'trades': 200.0}, 'quantity': 80}
+	# {'price': 20.0, 'quantity': 80}
 
 
 	# create some other occurrence with that subject.
 	# Now a purchase of 10 units of the asset, for the
 	# price of $20.
-	another_occurrence = Occurrence(
-			subject=some_asset,
-			date='2018-01-02',
-			quantity=10,
-			price=25
-		)
-	holder.accumulate(another_occurrence)
+	holder.trade(Occurrence(
+			some_asset,
+			'2018-01-04',
+			{
+				"quantity": 10,
+				"value": 25
+			}
+		))
 
 	# check the holder state. It should show a change in quantity
-	# and in the price paid for each unit of the subject:
-	for subject, subject_details in holder.subjects.items():
+	# and in the value of the subject:
+	for subject, state in holder.state.items():
 		print(subject)
-		print(subject_details.state)
+		print(state)
 	# AST1
-	# {'price': 20.555555555555557, 'results': {'trades': 200.0}, 'quantity': 90}
+	# {'price': 20.555555555555557, 'quantity': 90}
 
-
-Now using contexts with the same holder:
-
-.. code:: python
-
-	from trade.context import Context
-	from trade.context import fetch_daytrades
-
-	# An occurrence with a subject; a purchase of 10 units
-	# of the asset, for the price of $25.
-	occurrence_1 = Occurrence(
-			subject=some_asset,
-			date='2018-01-03',
-			quantity=10,
-			price=25
-		)
-	# An occurrence with the same subject on the same day;
-	# a sale of 5 units of the asset, for the price of $30.
-	occurrence_2 = Occurrence(
-			subject=some_asset,
-			date='2018-01-03',
-			quantity=-5,
-			price=28
-		)
-	# Creating a context with a list of occurrences and a list of
-	# rules; in this case, the fetch_daytrades() rule
-	some_context = Context(
-			[occurrence_1, occurrence_2],
-			[fetch_daytrades]
-		)
-	# fetch_positions() apply all contexts rules.
-	some_context.fetch_occurrences()
-
-	# accumulate all occurrences in the context:
-	for occurrences in some_context.data['occurrences'].values():
-	    for the_occurrence in occurrences.values():
-	        holder.accumulate(the_occurrence)
-
-	# check the holder state. It should show some results related
-	# to daytrades:
-	for subject, subject_details in holder.subjects.items():
-		print(subject)
-		print(subject_details.state)
-	# AST1
-	# {'price': 20.555555555555557, 'results': {'daytrades': 15.0, 'trades': 200.0}, 'quantity': 90}
 
 
 License

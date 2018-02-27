@@ -3,9 +3,7 @@ Change Log
 
 1.0.0
 -----
-* Simplified subjects and occurrences
-* Contexts
-* Holders
+* Core framework apart from example implementations.
 
 0.4 (2017-12-03)
 ----------------

@@ -1,4 +1,4 @@
-"""trade: Financial Application Framework.
+"""trade setup.py
 
 Copyright (c) 2015-2018 Rafael da Silva Rocha
 https://github.com/rochars/trade
@@ -21,14 +21,14 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 setup(
     name='trade',
     version="1.0.0",
-    description='Financial Application Framework',
+    description='A framework for financial applications.',
     long_description=long_description,
     url='https://github.com/rochars/trade',
     author="Rafael da Silva Rocha",
     author_email='rocha.rafaelsilva@gmail.com',
     license='MIT',
     classifiers=[
-        'Development Status :: 3 - Alpha',
+        'Development Status :: 5 - Production/Stable',
         'Intended Audience :: Developers',
         'Topic :: Software Development',
         'License :: OSI Approved :: MIT License',
@@ -38,6 +38,6 @@ setup(
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
     ],
-    keywords='asset stock exchange securities market finance investment money currency cost',
+    keywords='asset stock exchange securities market finance investment money currency cost framework',
     packages=['trade'],
 )
