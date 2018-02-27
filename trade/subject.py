@@ -41,4 +41,4 @@ class Subject(object):
         self.symbol = symbol
         self.details = {}
         if details:
-        	self.details = details
+            self.details = details
