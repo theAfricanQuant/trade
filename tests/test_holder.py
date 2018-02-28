@@ -27,6 +27,17 @@ class TestHolder(unittest.TestCase):
             "2018-01-02 00:00:00",
             {"quantity": 1, "value": 2}
         )
+        self.occurrence_4 = Occurrence(
+            subject,
+            "2018-01-02 00:00:00",
+            {"quantity": 2, "value": 2}
+        )
+
+        self.occurrence_5 = Occurrence(
+            subject,
+            "2018-01-02 00:00:00",
+            {"quantity": -2, "value": 2}
+        )
         self.holder = Holder()
 
     def test_holder_initial_state(self):
@@ -80,5 +91,40 @@ class TestHolder(unittest.TestCase):
                 "GOOG": {
                     "quantity": 2,
                     "value": 1.5
+                }
+            })
+
+    def test_holder_5(self):
+        self.holder.trade(self.occurrence_2)
+        self.holder.trade(self.occurrence_4)
+        self.assertEqual(
+            self.holder.state,
+            {
+                "GOOG": {
+                    "quantity": 1,
+                    "value": 2
+                }
+            })
+
+    def test_holder_6(self):
+        self.holder.trade(self.occurrence_1)
+        self.holder.trade(self.occurrence_5)
+        self.assertEqual(
+            self.holder.state,
+            {
+                "GOOG": {
+                    "quantity": -1,
+                    "value": 2
+                }
+            })
+
+    def test_holder_7(self):
+        self.holder.trade(self.occurrence_5)
+        self.assertEqual(
+            self.holder.state,
+            {
+                "GOOG": {
+                    "quantity": -2,
+                    "value": 2
                 }
             })

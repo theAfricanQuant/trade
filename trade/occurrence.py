@@ -86,6 +86,9 @@ class Occurrence(object):
             # If the Holder owns units of this subject then the average value
             # paid/received for the subject may need to be updated with
             # this occurrence details
+
+            # If the occurrence have the same sign as the quantity in the Holder
+            # state, a new average value needs to be calculated for the subject
             elif same_sign(
                     holder.state[subject_symbol]['quantity'],
                     self.details['quantity']):
@@ -95,6 +98,18 @@ class Occurrence(object):
                     self.details['quantity'],
                     self.details['value']
                 )
+
+            # If the occurrence does not have the same sign of the quantity in the
+            # Holder state, then do other stuff.
+            # A trade app would normally implement some sort of profit/loss logic
+            # here.
+            # This sample implementation only checks if the average value
+            # of the subject needs to be updated and then update it as needed.
+            else:
+                if same_sign(
+                        self.details['quantity'],
+                        holder.state[subject_symbol]['quantity'] + self.details['quantity']):
+                    holder.state[subject_symbol]['value'] = self.details['value']
 
             # Update the quantity of the subject in the Holder's posession
             holder.state[subject_symbol]['quantity'] += self.details['quantity']

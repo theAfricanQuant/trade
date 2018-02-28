@@ -1,6 +1,6 @@
 trade
 =====
-| A framework for financial applications.
+| A framework for financial apps.
 | Copyright (c) 2015-2018 Rafael da Silva Rocha
 | https://python-trade.appspot.com
 | https://github.com/rochars/trade
@@ -18,7 +18,16 @@ Installation
 
 trade
 -----
-**trade** is a framework for the creation of financial applications.
+**trade** is a framework for the creation of financial apps.
+
+**trade** implements a paradigm for financial apps where the operations
+themselves (called *occurrences*) are objects responsible for updating
+the state of an asset holder every time they occur.
+
+The asset holder state at a given timestamp may be loaded from a source
+(like a database) and then updated with a series of occurrences - raw 
+operation data loaded as *occurrence* objects. This outputs a new state
+for the Holder.
 
 
 It uses the concept of *holders*, *subjects*, *occurrences* and *contexts*
@@ -71,16 +80,15 @@ Live sample app
 ---------------
 You can try it `live <https://python-trade.appspot.com>`_.
 
-This is a sample app built with **trade**. It runs as a service.
+This is a **sample app** built with **trade**. It runs as a service.
 
-The input is a JSON containing *occurrences* and a initial state
+The input is a JSON with *occurrences* and a initial state
 for the *holder*.
 
-The sample app have *context tasks* to identify daytrades, apply
-costs to occurrences and more.
+The sample app have *context tasks* to **identify daytrades** and more.
 
-The service also calculates the profits and losses from the occurrences
-and groups the results by asset.
+The service also calculates the **profits** and **losses** from the
+occurrences and **groups the results** by asset.
 
 The output is the *holder* state as a JSON.
 
