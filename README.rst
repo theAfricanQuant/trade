@@ -184,6 +184,14 @@ More occurrences:
 	# {'value': 20.555555555555557, 'quantity': 90}
 
 
+About me
+--------
+
+I work as a consultant in the development of financial applications.
+
+Talk to me: rocha.rafaelsilva@gmail.com
+
+
 License
 -------
 Copyright (c) 2015-2018 Rafael da Silva Rocha
