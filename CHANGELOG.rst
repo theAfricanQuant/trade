@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+1.1.2 (2018-03-19)
+------------------
+* Updated docs.
+
 1.1.0 (2017-02-27)
 ------------------
 * "details" as a optional argument for Subject creation. Empty dict assumed as default.

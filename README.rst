@@ -26,8 +26,12 @@ the state of an asset holder every time they occur.
 
 The asset holder state at a given timestamp may be loaded from a source
 (like a database) and then updated with a series of occurrences - raw 
-operation data loaded as *occurrence* objects. This outputs a new state
-for the Holder.
+operation data loaded as *Occurrence* objects. This outputs a new state
+for the *Holder*.
+
+**trade** offers four classes: *Holder*, *Occurrence*, *Subject* and *Context*
+and defines the basic structure for a context-independent financial app. These
+classes should be extended according to the needs of the app.
 
 
 It uses the concept of *holders*, *subjects*, *occurrences* and *contexts*
@@ -38,7 +42,7 @@ A *holder* is someone who owns subjects.
 
 A *holder* state is updated by *occurrences*.
 
-*Occurrences* may occur alone or in *contexts*.
+*Occurrences* may happen alone or in *contexts*.
 
 
 A *subject* is anything that can be traded
@@ -49,12 +53,13 @@ A *subject* may be the share of a corporation, livestock and so on.
 A *holder* is a entity that owns subjects
 -----------------------------------------
 A *holder* owns subjects. The *holder* state is updated by occurrences.
+A holder may hold none or many subjects.
 
 
 *Occurrences* happen with subjects and change the state of the *holder*
 -----------------------------------------------------------------------
 A *occurrence* may be caused by the *holder*, like the purchase of units of some
-*subject*. They can also represent third-party events, like a stock split.
+*subject*. They can also represent other events, like a stock split.
 In both cases they should change the state of the *holder*.
 
 
@@ -130,6 +135,9 @@ Use:
 	# AST1
 	# {'value': 20.0, 'quantity': 100}
 
+Updating the holder state with a new occurrence:
+
+.. code:: python
 
 	# create some other occurrence with that subject.
 	# In this example, a sale of 20 units of the asset,
@@ -151,6 +159,9 @@ Use:
 	# AST1
 	# {'value': 20.0, 'quantity': 80}
 
+More occurrences:
+
+.. code:: python
 
 	# create some other occurrence with that subject.
 	# Now a purchase of 10 units of the asset, for the

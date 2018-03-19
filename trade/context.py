@@ -35,7 +35,7 @@ import copy
 class Context(object):
     """A class to group occurrences and contextualize them.
 
-    To contextualize a group of occurrences could be:
+    To contextualize a group of occurrences could mean:
     - To identify daytrades and separate them into different occurrences
       for taxation purposes
     - Group occurrences with the same subject into one occurrence
