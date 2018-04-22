@@ -1,6 +1,6 @@
 trade
 =====
-| A framework for financial apps.
+| A paradigm for financial apps.
 | Copyright (c) 2015-2018 Rafael da Silva Rocha
 | https://python-trade.appspot.com
 | https://github.com/rochars/trade
@@ -18,8 +18,6 @@ Installation
 
 trade
 -----
-**trade** is a framework for the creation of financial apps.
-
 **trade** implements a paradigm for financial apps where the operations
 themselves (called *occurrences*) are objects responsible for updating
 the state of an asset holder every time they occur.
@@ -190,6 +188,13 @@ About me
 I work as a consultant in the development of financial applications.
 
 Talk to me: rocha.rafaelsilva@gmail.com
+
+
+Node.js
+-------
+A Node.js version of the trade paradigm intended for the Web:
+
+https://github.com/rochars/trade-node
 
 
 License
