@@ -7,7 +7,7 @@ trade
 
 --------------
 
-| |Version| |Live Demo|
+| |Version| |Documentation| |Live Demo|
 | |Build| |Windows Build| |Coverage Status| |Scrutinizer| |cii|
 
 
@@ -217,7 +217,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 .. |Version| image:: https://img.shields.io/pypi/v/trade.svg?style=for-the-badge
    :target: https://pypi.python.org/pypi/trade/
-.. |Documentation| image:: https://readthedocs.org/projects/trade/badge/?style=for-the-badge
+.. |Documentation| image:: https://img.shields.io/badge/API-DOCS-blue.png?style=for-the-badge
    :target: http://trade.readthedocs.org/en/latest/
 .. |Live Demo| image:: https://img.shields.io/badge/try-live%20demo-blue.png?style=for-the-badge
    :target: https://python-trade.appspot.com/
