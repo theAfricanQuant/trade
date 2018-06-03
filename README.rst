@@ -7,13 +7,14 @@ trade
 
 --------------
 
-|Build| |Windows Build| |Coverage Status| |Scrutinizer| |Python Versions| |Live Demo|
+| |Version| |Live Demo|
+| |Build| |Windows Build| |Coverage Status| |Scrutinizer| |cii|
 
 
 Installation
 ------------
 
-    $ pip install trade
+	pip install trade
 
 
 trade
@@ -190,13 +191,6 @@ I work as a consultant in the development of financial applications.
 Talk to me: rocha.rafaelsilva@gmail.com
 
 
-Node.js
--------
-A Node.js version of the trade paradigm intended for the Web:
-
-https://github.com/rochars/trade-node
-
-
 License
 -------
 Copyright (c) 2015-2018 Rafael da Silva Rocha
@@ -221,20 +215,20 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-
-.. |Build| image:: https://img.shields.io/travis/rochars/trade.svg?label=unix%20build
-   :target: https://travis-ci.org/rochars/trade
-.. |Windows Build| image:: https://img.shields.io/appveyor/ci/rochars/trade.svg?label=windows%20build
-   :target: https://ci.appveyor.com/project/rochars/trade
-.. |Coverage Status| image:: https://coveralls.io/repos/rochars/trade/badge.svg?branch=master&service=github
-   :target: https://coveralls.io/github/rochars/trade?branch=master
-.. |Scrutinizer| image:: https://scrutinizer-ci.com/g/rochars/trade/badges/quality-score.png?b=master
-   :target: https://scrutinizer-ci.com/g/rochars/trade/
-.. |Python Versions| image:: https://img.shields.io/pypi/pyversions/trade.png
+.. |Version| image:: https://img.shields.io/pypi/v/trade.svg?style=for-the-badge
    :target: https://pypi.python.org/pypi/trade/
-.. |Live Demo| image:: https://img.shields.io/badge/try-live%20demo-blue.png
-   :target: https://python-trade.appspot.com/
-.. |Documentation| image:: https://readthedocs.org/projects/trade/badge/
+.. |Documentation| image:: https://readthedocs.org/projects/trade/badge/?style=for-the-badge
    :target: http://trade.readthedocs.org/en/latest/
-.. |License| image:: https://img.shields.io/pypi/l/trade.png
-   :target: https://opensource.org/licenses/MIT
+.. |Live Demo| image:: https://img.shields.io/badge/try-live%20demo-blue.png?style=for-the-badge
+   :target: https://python-trade.appspot.com/
+
+.. |Build| image:: https://img.shields.io/travis/rochars/trade.svg?style=flat-square
+   :target: https://travis-ci.org/rochars/trade
+.. |Windows Build| image:: https://img.shields.io/appveyor/ci/rochars/trade.svg?logo=appveyor&style=flat-square
+   :target: https://ci.appveyor.com/project/rochars/trade
+.. |Coverage Status| image:: https://img.shields.io/coveralls/github/rochars/trade/master.svg?style=flat-square
+   :target: https://coveralls.io/github/rochars/trade?branch=master
+.. |Scrutinizer| image:: https://img.shields.io/scrutinizer/g/rochars/trade.svg?style=flat-square
+   :target: https://scrutinizer-ci.com/g/rochars/trade/
+.. |cii| image:: https://bestpractices.coreinfrastructure.org/projects/1890/badge
+   :target: https://bestpractices.coreinfrastructure.org/projects/1890
