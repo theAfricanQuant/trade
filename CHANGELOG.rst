@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+1.1.3 (2018-06-02)
+------------------
+* fix: Removed unused *copy* import in *subject.py*.
+
 1.1.2 (2018-03-19)
 ------------------
 * Updated docs.
