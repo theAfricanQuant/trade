@@ -1,6 +1,4 @@
-"""trade
-
-A framework for financial applications.
+"""A framework for financial applications.
 
 https://github.com/rochars/trade
 License: MIT
@@ -26,6 +24,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 """
 
-__version__ = '1.1.3'
+__version__ = '1.1.4'
 __author__ = 'Rafael da Silva Rocha'
 __licence__ = 'MIT'

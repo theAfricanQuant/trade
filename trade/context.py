@@ -1,9 +1,6 @@
-"""Context
-
-A class to group occurrences and contextualize them.
+"""trade.Context
 
 https://github.com/rochars/trade
-License: MIT
 
 Copyright (c) 2015-2018 Rafael da Silva Rocha
 
@@ -37,7 +34,6 @@ class Context(object):
 
     To contextualize a group of occurrences could mean:
     - To identify daytrades and separate them into different occurrences
-      for taxation purposes
     - Group occurrences with the same subject into one occurrence
     - Apply costs and other deductions to the value to the occurrences
     - Calculate taxes based on the occurrences in the context

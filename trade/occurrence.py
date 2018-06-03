@@ -1,9 +1,6 @@
-"""Occurrence
-
-A class to represent occurrences with subjects.
+"""trade.Occurrence
 
 https://github.com/rochars/trade
-License: MIT
 
 Copyright (c) 2015-2018 Rafael da Silva Rocha
 
@@ -57,15 +54,20 @@ class Occurrence(object):
 
         This sample implementation considers the following signature for
         the Holder.state dict:
+        
+        .. code:: python
+
             {
                 "SUBJECT SYMBOL": {
                     "quantity": 0,
                     "value": 0
-                },
-                ...
+                }
             }
 
         And the following signature for the Occurrance.details dict:
+        
+        .. code:: python
+
             {
                 "quantity": 0,
                 "value": 0

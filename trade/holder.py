@@ -1,9 +1,6 @@
-"""Holder
-
-A class to represent a owner of subjects.
+"""trade.Holder
 
 https://github.com/rochars/trade
-License: MIT
 
 Copyright (c) 2015-2018 Rafael da Silva Rocha
 
@@ -41,14 +38,6 @@ class Holder(object):
 
     Attributes:
         state: A dict representing the state of the Holder.
-            The example implementation uses the following signature:
-            {
-                "SUBJECT SYMBOL": {
-                    "quantity": 0,
-                    "value": 0
-                },
-                ...
-            }
     """
 
     def __init__(self, state=None):

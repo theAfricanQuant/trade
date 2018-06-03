@@ -1,9 +1,6 @@
-"""Subject
-
-A class to represent a tradable unit.
+"""trade.Subject
 
 https://github.com/rochars/trade
-License: MIT
 
 Copyright (c) 2015-2018 Rafael da Silva Rocha
 
