@@ -12,6 +12,11 @@ To run the tests:
     
     python -m unittest discover
 
+Style guide:
+------------
+**trade** code should follow the Google Python Style Guide:  
+https://google.github.io/styleguide/pyguide.html
+
 Developer's Certificate of Origin 1.1
 -------------------------------------
 By making a contribution to this project, I certify that:

@@ -183,12 +183,11 @@ More occurrences:
 	# {'value': 20.555555555555557, 'quantity': 90}
 
 
-About me
---------
+Contributing
+------------
+**trade** welcomes all contributions from anyone willing to work in good faith with other contributors and the community. No contribution is too small and all contributions are valued.
 
-I work as a consultant in the development of financial applications.
-
-Talk to me: rocha.rafaelsilva@gmail.com
+See CONTRIBUTING.rst for information about how to contribute to this project.
 
 
 License
