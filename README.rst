@@ -2,12 +2,11 @@ trade
 =====
 | A paradigm for financial apps.
 | Copyright (c) 2015-2018 Rafael da Silva Rocha
-| https://python-trade.appspot.com
 | https://github.com/rochars/trade
 
 --------------
 
-| |Version| |Documentation| |Live Demo|
+| |Version| |Documentation|
 | |Build| |Windows Build| |Coverage Status| |Scrutinizer| |cii|
 
 
@@ -88,8 +87,6 @@ Live sample app
 A peak of interest in this app made the server costs too high for me. I'm working on a solution.
 
 It used to work like this (and hopefully will work again soon):
-
-You can try it `live <https://python-trade.appspot.com>`_.
 
 This is a **sample app** built with **trade**. It runs as a service.
 
@@ -225,8 +222,6 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
    :target: https://pypi.python.org/pypi/trade/
 .. |Documentation| image:: https://img.shields.io/badge/API-DOCS-blue.png?style=for-the-badge
    :target: http://trade.readthedocs.org/en/latest/
-.. |Live Demo| image:: https://img.shields.io/badge/try-live%20demo-blue.png?style=for-the-badge
-   :target: https://python-trade.appspot.com/
 
 .. |Build| image:: https://img.shields.io/travis/rochars/trade.svg?style=flat-square
    :target: https://travis-ci.org/rochars/trade
