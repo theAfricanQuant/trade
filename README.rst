@@ -82,6 +82,13 @@ The *holder* state signature can be defined according to the needs of the applic
 
 Live sample app
 ---------------
+
+**The sample app is not working right now (2018-07-11).**
+
+A peak of interest in this app made the server costs too high for me. I'm working on a solution.
+
+It used to work like this (and hopefully will work again soon):
+
 You can try it `live <https://python-trade.appspot.com>`_.
 
 This is a **sample app** built with **trade**. It runs as a service.
