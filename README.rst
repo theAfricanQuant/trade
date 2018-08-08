@@ -82,11 +82,11 @@ The *holder* state signature can be defined according to the needs of the applic
 Live sample app
 ---------------
 
-**The sample app is not working right now (2018-07-11).**
+**The sample app is not working right now (2018-08-08).**
 
-A peak of interest in this app made the server costs too high for me. I'm working on a solution.
+**A peak of interest in this app made the server costs too high for me. I'm working on a JavaScript implementation that will be suitable for browsers and Node.js. The sample app will be back again soon, in your browser. Check this repo for updates.**
 
-It used to work like this (and hopefully will work again soon):
+It used to be like this:
 
 This is a **sample app** built with **trade**. It runs as a service.
 
